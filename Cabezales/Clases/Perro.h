@@ -1,4 +1,6 @@
-#ifndef VARIABLE
-#define VARIABLE
+#ifndef PERRO_H
+#define PERRO_H
 // Write your header file here.
+
+
 #endif
