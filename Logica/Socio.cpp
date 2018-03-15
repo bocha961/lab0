@@ -7,6 +7,10 @@ Socio::Socio(string ci, string nombre){
     this->ci = ci;
     this->nombre = nombre;
 }
+~Socio::Socio(){
+	delete[] this->mascotas;
+	delete[] this->consultas;
+}
  
 void Socio::setCI(string ci){
     thisci = ci;

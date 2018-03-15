@@ -18,6 +18,8 @@ class Socio{
 
     public:
         Socio(string ci, string nombre);
+		~Socio();
+
         void setCI(string ci);
         string getCI();
         void setNombre(string nombre);

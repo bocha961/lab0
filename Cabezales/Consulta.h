@@ -11,7 +11,9 @@ class Consulta{
         string motivo;
 
     public:
-        Consulta(); //Constructor por defecto
+        Consulta(DtFecha fecha, string motivo); //Constructor por defecto
+		~Consulta();
+
         void setFecha(DtFecha fecha);
         DtFecha getFecha();
         void setMotivo(string motivo);

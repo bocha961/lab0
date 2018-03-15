@@ -1,7 +1,13 @@
 #include <iostream>
 #include "../Cabezales/Consulta.h"
 
-Consulta::Consulta(){}
+Consulta::Consulta(DtFecha fecha, string motivo){
+	this->fechaConsulta = fecha;
+	this->motivo = motivo;
+}
+~Consulta::Consulta(){
+	delete this->fechaConsulta;
+}
 
 void Consulta::setFecha(DtFecha fecha){
     this->fechaConsulta = fecha;
