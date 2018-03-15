@@ -1,13 +1,13 @@
 #include <iostream>
 #include "../Cabezales/Consulta.h"
 
-void Consulta::Consulta(){}
+Consulta::Consulta(){}
 
-void Consulta::setFecha(Fecha fecha){
+void Consulta::setFecha(DtFecha fecha){
     this->fechaConsulta = fecha;
 }
-Fecha Consulta::getFecha(){
-    return this->fechaConsulta
+DtFecha Consulta::getFecha(){
+    return this->fechaConsulta;
 }
 
 void Consulta::setMotivo(string motivo){

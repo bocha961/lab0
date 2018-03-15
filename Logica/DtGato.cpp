@@ -1,9 +1,9 @@
 #include "../Cabezales/DtGato"
 
-void DataGato::DataGato(TipoPelo tipoPalo){
+void DtGato::DtGato(TipoPelo tipoPalo){
     this.tipoPelo = tipoPelo;
 }
 
-TipoPelo getTipoPelo(){
-    return this.tipoPelo
+TipoPelo DtGato::getTipoPelo(){
+    return this->tipoPelo
 }

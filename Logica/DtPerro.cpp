@@ -1,14 +1,14 @@
 #include "../Cabezales/DtPerro.h"
 
-void DataPerro::DataPerro(RazaPerro raza, bool vacunaCachorro){
+void DtPerro::DtPerro(RazaPerro raza, bool vacunaCachorro){
     this->raza           = raza;
     this->vacunaCachorro = vacunaCachorro;
 }
 
-RazaPerro DataPerro::getRazaPerro(){
+RazaPerro DtPerro::getRazaPerro(){
     return this->raza;
 }
 
-bool DataPerro::getVacunaCachorro(){
+bool DtPerro::getVacunaCachorro(){
     return this->vacunaCachorro;
 }

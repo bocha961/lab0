@@ -4,13 +4,14 @@
 // Write your header file here.
 #include <string>
 #include "Utils.h"
+#include "DtMascota.h"
 
-class DataGato : public DataMascota {
+class DtGato : public DtMascota {
     private:
         TipoPelo tipoPelo;
-        
+
     public:
-        DataGato(TipoPelo tipoPelo);
+        DtGato(TipoPelo tipoPelo);
         TipoPelo getTipoPelo();
 };
 

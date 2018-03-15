@@ -1,24 +1,24 @@
 #include "../Cabezales/DtMascota.h"
 
-void DataMascota::DataMascota(string nombre, Genero genero, float peso, float racionDiario){
+void DtMascota::DtMascota(string nombre, Genero genero, float peso, float racionDiario){
     this->nombre         = nombre;
     this->genero         = genero;
     this->peso           = peso;
     this->racionDiario   = racionDiaria;
 }
 
-string DataMascota::getNombre(){
+string DtMascota::getNombre(){
     return this->nombre;
 }
 
-Genero DataMascota::getGenero(){
+Genero DtMascota::getGenero(){
     return this->genero;
 }
 
-float DataMascota::getPeso(){
+float DtMascota::getPeso(){
     return this->peso;
 }
 
-float DataMascota::getRacionDiaria(){
+float DtMascota::getRacionDiaria(){
     return this->racionDaria;
 }
