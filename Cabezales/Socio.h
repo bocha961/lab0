@@ -10,24 +10,25 @@
 using std::string;
 
 class Socio{
-    Private:
+    private:
         string ci, nombre;
         Fecha fechaIngreso;
         Mascota mascotas[10];
         Consulta consultas[20];
 
-    Public:
+    public:
         Socio();
         
         void setCI(string ci);
         string getCI();
         void setNombre(string nombre);
         string getNombre();
-        void setFechaIngreso(Fecha fechai);
-        Fecha getFecha();
-        Consulta[] getConsulta(Fecha fechaCons, string motivo);
-        agregarMascota(DtMascota dtMascota)
-        vector<Consulta> getConsultas();
+        void setFechaIngreso(Fecha fecha);
+        Fecha getFechaIngreso();
+        void setConsultas(Consulta* consultas);
+        Consulta *getConsultas();        
+        void setMascotas(Mascota *mascotas);
+        Mascota *getMascota();
 };
 
 

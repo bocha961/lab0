@@ -10,6 +10,7 @@ class DataGato : public DataMascota {
         TipoPelo tipoPelo;
         
     public:
+        DataGato(TipoPelo tipoPelo);
         TipoPelo getTipoPelo();
 };
 

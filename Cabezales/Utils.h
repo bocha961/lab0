@@ -5,16 +5,16 @@
 
 using std::string;
 
-enum class Genero{Macho, Hembra};
+enum Genero{macho, hembra};
 
-string generoString(); 
+string generoString(Genero g); 
 
-enum class RazaPerro{ labrador, ovejero, bulldog, pitbull, collie, pekines, otro};
+enum RazaPerro{ labrador, ovejero, bulldog, pitbull, collie, pekines, otro};
 
-string razaPerroString();
+string razaPerroString(RazaPerro r);
 
-enum class TipoPelo{ Corto, Mediano, Largo};
+enum TipoPelo{ corto, mediano, largo};
 
-string tipoPeloString();
+string tipoPeloString(TipoPelo t);
 
 #endif

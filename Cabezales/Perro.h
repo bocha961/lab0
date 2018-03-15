@@ -5,18 +5,18 @@
 #include "Utils.h"
 
 class Perro : public Mascota{
-    Private:
+    private:
         RazaPerro raza;
         bool vacunaCachorro;
         
-    Public:
+    public:
         Perro();
         float obtenerRacionDiaria();
         
         RazaPerro getRazaPerro();
-        void setRazaPerro(RazaPerro razaNueva);
+        void setRazaPerro(RazaPerro raza);
         bool getVacunaCachorro();
-        void setVacunaCachorro(bool vacunaNueva);
+        void setVacunaCachorro(bool vacuna);
         
 };
 

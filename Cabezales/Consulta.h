@@ -13,8 +13,10 @@ class Consulta{
     public:
         Consulta(); //Constructor por defecto
         void setFecha(Fecha fecha);
-        void setNombre(string nombre);
-        Fecha getFecha();    
+        Fecha getFecha();  
+        void setMotivo(string motivo);
+        string getMotivo();
+  
 };
 
 #endif

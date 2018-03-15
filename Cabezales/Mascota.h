@@ -15,6 +15,10 @@ class Mascota{
         virtual float obtenerRacionDiaria() = 0;
         Genero getGenero();
         void setGenero(Genero genero);
+        string getNombre();
+        void setNombre(string nombre);
+        float getPeso();
+        void setPeso(float peso);
         
 };
 
