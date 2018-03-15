@@ -1,11 +1,13 @@
 #include "../Cabezales/DtMascota.h"
 
-void DtMascota::DtMascota(string nombre, Genero genero, float peso, float racionDiario){
+DtMascota::DtMascota(string nombre, Genero genero, float peso, float racionDiario){
     this->nombre         = nombre;
     this->genero         = genero;
     this->peso           = peso;
     this->racionDiario   = racionDiaria;
 }
+
+~DtMascota(){}
 
 string DtMascota::getNombre(){
     return this->nombre;

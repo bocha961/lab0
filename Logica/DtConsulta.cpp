@@ -6,6 +6,10 @@ DtConsulta::DtConsulta(DtFecha fechaConsulta, string motivo){
     this->motivo = motivo;
 }
 
+~DtConsulta(){
+    delete fechaConsulta;
+}
+
 DtFecha DtConsulta::getFecha(){
     return this->fecha;
 }
