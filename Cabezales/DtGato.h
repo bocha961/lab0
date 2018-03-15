@@ -12,6 +12,7 @@ class DtGato : public DtMascota {
 
     public:
         DtGato(TipoPelo tipoPelo);
+        ~DtGato();
         TipoPelo getTipoPelo();
 };
 

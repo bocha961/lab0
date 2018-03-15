@@ -15,6 +15,7 @@ class DtConsulta {
 
     public:
         DtConsulta(DtFecha fechaConsulta, string motivo); //Constructor de la clase
+        ~DtConsulta();
         DtFecha getFecha();
         string getMotivo();
 };
