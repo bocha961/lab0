@@ -2,7 +2,6 @@
 #define SOCIO_H
 
 #include <string>
-#include <vector>
 #include "Mascota.h"
 #include "Consulta.h"
 #include "DtFecha.h"
@@ -26,10 +25,12 @@ class Socio{
         string getNombre();
         void setFechaIngreso(DtFecha fecha);
         DtFecha getFechaIngreso();
+		void agregarConsulta(DtConsulta nuevaConsulta);
         void setConsultas(Consulta* consultas);
         Consulta *getConsultas();
+		void agregarMascota(DtMascota nuevaMascota);
         void setMascotas(Mascota *mascotas);
-        Mascota *getMascota();
+        Mascota *getMascotas();
 };
 
 

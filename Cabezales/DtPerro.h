@@ -3,6 +3,7 @@
 
 // Write your header file here.
 #include "Utils.h"
+#include "DtMascota.h"
 
 class DtPerro : public DtMascota {
     private:
@@ -10,7 +11,7 @@ class DtPerro : public DtMascota {
         bool vacunaCachorro;
 
     public:
-        DtPerro(RazaPerro raza, bool vacunaCachorro);
+        DtPerro(string nombre, Genero genero, float peso, RazaPerro raza, bool vacunaCachorro);
         ~DtPerro();
         RazaPerro getRazaPerro();
         bool getVacunaCachorro();

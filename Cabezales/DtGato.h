@@ -11,7 +11,7 @@ class DtGato : public DtMascota {
         TipoPelo tipoPelo;
 
     public:
-        DtGato(TipoPelo tipoPelo);
+        DtGato(string nombre, Genero genero, float peso, TipoPelo tipoPelo);
         ~DtGato();
         TipoPelo getTipoPelo();
 };

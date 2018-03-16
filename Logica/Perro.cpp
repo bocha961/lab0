@@ -1,8 +1,7 @@
 #include "../Cabezales/Perro.h"
+#include "../Cabezales/Mascota.h"
 
-
-//Constructor por herencia
-Perro::Perro (string nombre, float peso, Genero genero, RazaPerro raza, bool vacunaCachorro) : Mascota::Mascota(nombre, genero, fechaIngreso){//llamada al const. de la Superclase
+Perro::Perro (string nombre, float peso, Genero genero, RazaPerro raza, bool vacunaCachorro) : Mascota::Mascota(nombre, peso, genero){
 	this->raza = raza;
 	this->vacunaCachorro = vacuna;
 }
