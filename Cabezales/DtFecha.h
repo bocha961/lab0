@@ -2,14 +2,15 @@
 #define FECHA_H
 // Write your header file here.
 
-class Fecha {
+class DtFecha {
     private:
         int dia;
         int mes;
         int anio;
-        
+
     public:
-        Fecha(int dia, int mes, int anio);
+        DtFecha(int dia, int mes, int anio);
+        ~DtFecha();
         int getDia();
         int getMes();
         int getAnio();

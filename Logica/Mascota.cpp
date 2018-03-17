@@ -1,8 +1,12 @@
-#incluide "../Laboratorio0/Ej1/Cabezales/DtMascota.h"
-#incluide "../Laboratorio0/Ej1/Cabezales/Mascota.h"
+#include "../Laboratorio0/Ej1/Cabezales/Mascota.h"
 
 using std::string;
 
+Mascota::Mascota(string nombre, float peso, Genero genero){
+	this->nombre 	= nombre;
+	this->peso 		= peso;
+	this->genero	= genero;
+}
 
 Genero Mascota::getGenero(){
     return this->genero;

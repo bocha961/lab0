@@ -6,12 +6,13 @@
 #include "Utils.h"
 #include "DtMascota.h"
 
-class DataGato : public DataMascota {
+class DtGato : public DtMascota {
     private:
         TipoPelo tipoPelo;
-        
+
     public:
-        DataGato(TipoPelo tipoPelo);
+        DtGato(string nombre, Genero genero, float peso, TipoPelo tipoPelo);
+        ~DtGato();
         TipoPelo getTipoPelo();
 };
 

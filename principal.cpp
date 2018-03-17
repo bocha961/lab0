@@ -170,4 +170,8 @@ bool termino = false;
 
 
     return 0;
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> 0b615632ab6e03b6e34e0ffc78a25277f2124552

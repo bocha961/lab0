@@ -28,7 +28,7 @@ EJECUTABLE = principal
 #compilador
 CC = g++
 #flags
-CCFLAGS = -std=c++11 -Wall -Werror -I$(HDIR) -g
+CCFLAGS = -std=c++11 -g -Wall -Werror -I$(HDIR) 
 
 $(ODIR)/$(PRINCIPAL).o:$(PRINCIPAL).cpp
 	$(CC) $(CCFLAGS) -c $< -o $@

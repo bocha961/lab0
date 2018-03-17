@@ -1,9 +1,13 @@
-#include "../Cabezales/DtGato"
+#include "../Cabezales/DtGato.h"
+#include "../Cabezales/DtMascota.h"
 
-void DataGato::DataGato(TipoPelo tipoPalo){
+DtGato::DtGato(string nombre, float peso, Genero genero, TipoPelo tipoPelo) : DtMascota(nombre, peso, genero, (peso * 0.015)){
     this.tipoPelo = tipoPelo;
 }
 
-TipoPelo getTipoPelo(){
-    return this.tipoPelo
+DtGato::~DtGato(){}
+
+TipoPelo DtGato::getTipoPelo(){
+    return this->tipoPelo;
 }
+

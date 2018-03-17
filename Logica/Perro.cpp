@@ -1,6 +1,11 @@
 #include "../Cabezales/Perro.h"
+#include "../Cabezales/Mascota.h"
 
-void Perro::Perro(){}
+Perro::Perro (string nombre, float peso, Genero genero, RazaPerro raza, bool vacunaCachorro) : Mascota::Mascota(nombre, peso, genero){
+	this->raza = raza;
+	this->vacunaCachorro = vacuna;
+}
+~Perro::perro(){}
 
 float Perro::obtenerRacionDiario(){
     return (this->peso) * 0.025;

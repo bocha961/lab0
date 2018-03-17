@@ -4,19 +4,20 @@
 // Write your header file here.
 #include <string>
 #include <iostream>
-#include "Fecha.h"
+#include "DtFecha.h"
 
 using std::string;
 
-class DataConsulta {
+class DtConsulta {
     private:
-        Fecha fechaConsulta;
+        DtFecha fechaConsulta;
         string motivo;
-        
+
     public:
-        DataConsulta(Fecha fechaConsulta, string motivo); //Constructor de la clase
-        Fecha getFecha();  
-        string getMotivo();        
+        DtConsulta(DtFecha fechaConsulta, string motivo); //Constructor de la clase
+        ~DtConsulta();
+        DtFecha getFecha();
+        string getMotivo();
 };
 
 #endif

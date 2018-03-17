@@ -3,16 +3,18 @@
 
 // Write your header file here.
 #include "Utils.h"
+#include "DtMascota.h"
 
-class DataPerro : public DataMascota {
-    private: 
+class DtPerro : public DtMascota {
+    private:
         RazaPerro raza;
         bool vacunaCachorro;
-    
+
     public:
-        DataPerro(RazaPerro raza, bool vacunaCachorro);
+        DtPerro(string nombre, Genero genero, float peso, RazaPerro raza, bool vacunaCachorro);
+        ~DtPerro();
         RazaPerro getRazaPerro();
-        bool getVacunaCachorro();        
+        bool getVacunaCachorro();
 };
 
 

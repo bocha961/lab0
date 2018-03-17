@@ -6,19 +6,21 @@
 
 using std::string;
 
-class DataMascota {
+class DtMascota {
     private:
         string nombre;
         Genero genero;
         float peso;
         float racionDiaria;
-    
+
     public:
-        DataMascota(string nombre, Genero genero, float peso, float racionDiaria);
+        DtMascota(string nombre, Genero genero, float peso, float racionDiaria);
+        ~DtMascota();
+
         string getNombre();
         Genero getGebero();
         float getPeso();
-        float getRacionDiaria();    
+        float getRacionDiaria();
 };
 
 #endif

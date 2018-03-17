@@ -1,22 +1,24 @@
 #ifndef CONSULTA_H
 #define CONSULTA_H
 
-#include "Fecha.h"
+#include "DtFecha.h"
 
 using std::string;
 
 class Consulta{
     private:
-        Fecha fechaConsulta;
+        DtFecha fechaConsulta;
         string motivo;
-    
+
     public:
-        Consulta(); //Constructor por defecto
-        void setFecha(Fecha fecha);
-        Fecha getFecha();  
+        Consulta(DtFecha fecha, string motivo); //Constructor por defecto
+		~Consulta();
+
+        void setFecha(DtFecha fecha);
+        DtFecha getFecha();
         void setMotivo(string motivo);
         string getMotivo();
-  
+
 };
 
 #endif

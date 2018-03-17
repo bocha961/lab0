@@ -11,7 +11,9 @@ class Mascota{
         Genero genero;
     
     public:
-        Mascota(); 
+        Mascota(string nombre, float peso, Genero genero); 
+		~Mascota();
+
         virtual float obtenerRacionDiaria() = 0;
         Genero getGenero();
         void setGenero(Genero genero);
