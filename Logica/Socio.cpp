@@ -37,9 +37,13 @@ DtFecha Socio::getFechaIngreso(){
 
 void Socio::agregarConsulta(DtConsulta datosConsulta){
 	Consulta nuevaConsulta = new Consulta(datosConsulta.getFecha(), datosConsulta.getMotivo());
-	
-	
+	int posicionAgregar = this->consultas.size();	
+	int capacidad = this->consultas.max_size();
 
+	if(posicionAgregar != capacidad)
+		this->consultas[posicionAgregar] = nuevaConsulta;
+	else
+		throw std::range_error("Maximo de consultas")
 }
 void Socio::setConsultas(Consulta* consultas){
     this->consultas = consultas;
@@ -49,7 +53,8 @@ Consulta* Socio::getConsultas(){
 }
 
 void Socio::agregarMascota(DtMascota datosMascota){
-
+	Mascota nuevaMascotaPerro	=
+	Mascota nuevaMascotaGato	=
 }
 void Socio::setMascotas(Mascota* mascotas){
     this->mascotas = mascotas;
