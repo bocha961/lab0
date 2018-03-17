@@ -16,9 +16,8 @@ class Socio{
         Mascota *mascotas[10];
         Consulta *consultas[20];
 
-    public
-        Socio(string ci, string nombre);
-        
+    public:
+        Socio(string ci, string nombre); 
         void setCI(string ci);
         string getCI();
         void setNombre(string nombre);
