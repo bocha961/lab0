@@ -1,6 +1,6 @@
 #include <iostream>
 #include <array>
-#include "../Cabezales/Socilso.h"
+#include "../Cabezales/Socio.h"
 #include "../Cabezales/Consulta.h"
 #include "../Cabezales/DtConsulta.h"
 #include "../Cabezales/DtGato.h"
@@ -41,14 +41,21 @@ void agregarMascota(string ci, const DtMascota &dtMascota){
 
 
 };
-asddas
 
 
 void registrarSocio(string ci, string nombre, const dtMascota &dtMascota){
+        //Obtener fecha del sistema
+        time_t t1;
+        struct tm *tm_t2;
 
-        Socio *nuevoSocio = new Socio(ci, nombre);
+        time(&t1);
+        tm_t2 = localtime(&t1);
+        int dia = tm_t2->tm_mday;
+        int mes = tm_t2->tm_mon;
+        int anio = tm_t2->tm_year;
+        DtFecha fechaIngreso = new DtFecha(dia, mes, anio);
 
-
+        Socio *nuevoSocio = new Socio(ci, nombre, fechaIngreso);
 
         //Usar fecha del sistema (ni idea como gg ekide)
 
@@ -65,31 +72,52 @@ void registrarSocio(string ci, string nombre, const dtMascota &dtMascota){
 
 };
 void ingresarConsulta(string motivo, string ci){
-    int tamanio = sizeof(coleccionSocios);
-     
+    int tamanio = coleccionSocios.size();
+
      //busca el indice donde esta el socio
      int i = BuscarSocio(ci,coleccionSocios);
      //aca va un try
      if(i<= tamanio){  //Si se encuentra el socio, se agrega su mascota
         DtConsulta consulta = new DtConsulta(fecha, motivo);
-        coleccionSocios[i]->agregarConsulta(consulta);
+        coleccionSocios[i].agregarConsulta(consulta);
         };
 
 }
 
 DtConsulta** verConsultasAntesDeFecha(const DtFecha& fecha, string ciSocio, int& cantConsultas){
-    int = buscarSocio(i)
-    DtConsulta** arregloCons = new DtConsulta[cantConsultas];
-        while( getFecha(coleccionSocios[i]->consultas[j]) < fecha ){
+    int i = buscarSocio(ciSocio, coleccionSocios);
+    int j = 0;
+    DtConsulta** arregloCons = new DtConsulta[cantConsultas]; //arreglo que voy a devolver
+    DtConsulta** consultasHechas = coleccionSocios[i].getConsultas();
+        while( consultasHechas[j].getFecha() < fecha ){
             //Hago una copia del arreglo hasta la fecha
-            arregloCons[j] = new Consulta(coleccionSocios[i]->consultas[j].getFecha, coleccionSocios[i]->consultas[j].getMotivo())
+            arregloCons[j] = new Consulta(consultasHechas.getFecha(), consultasHechas.getMotivo())
+            j++;
 
         } // Hay que sobrecargar el operador < para comparar fechas
 
 
 
-return arregloCons;
+    return arregloCons;
 
+}
+void eliminarSocio(string ci){
+    int i = BuscarSocio(ci, coleccionSocios);
+    //Usar destructor de Socio
+    // Segun Santi esto llama a todo implicitamente
+    delete coleccionSocios[i];
+}
+
+DtMascota** obtenerMascotas(string ci, int &cantMascotas){
+    int i = BuscarSocio(ci, coleccionSocios);
+    j=0;
+    DtMascota** arregloMascotas = new DtMascotas[cantMascotas];
+    DtMascota** mascotasExistentes = coleccionSocios[i].getMascotas();
+    while(j < cantMascotas){
+        arregloMascotas[j] = mascotasExistentes[j];
+        j++;
+    }
+    return arregloMascotas;
 }
 
 
@@ -120,16 +148,23 @@ bool termino = false;
                 cin >> opcionMascota;
                 switch(opcionMascota){
                     case 1:
-
+			cout << "Ingrese sus datos personales" << endl;
+			cout << "Ingrese su nombre: ";			
+			string nombreSocio;
+			cin >> nombre;
+			cout << "Ingrese su cedula de identidad";
+			string ci;
+			cin >> ci;		
+			
                         cout << "Ingrese datos de su perro";
                         //cargar datatype Perro
-                        string nombre;
+                        string nombrePerro;
                         float peso;
                         Genero genero;
-                        Raza raza;
+                        RazaPerro raza;
                         bool vacuna;
                         //carga un DTPerro
-                        DtPerro dataPerro = new DtPerro(nombre, peso, genero, raza, vacuna);
+                        DtPerro *dataPerro = new DtPerro(nombrePerro, genero, peso, raza, 				vacuna);
                         registrarSocio(ci, nombre, dataPerro);
                     break;
 
@@ -171,8 +206,4 @@ bool termino = false;
 
 
     return 0;
-<<<<<<< HEAD
 };
-=======
-}
->>>>>>> 0b615632ab6e03b6e34e0ffc78a25277f2124552
