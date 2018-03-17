@@ -5,6 +5,8 @@
 #include "Mascota.h"
 #include "Consulta.h"
 #include "DtFecha.h"
+#include "DtConsulta.h"
+#include "DtMascota.h"
 
 using std::string;
 
@@ -16,13 +18,9 @@ class Socio{
         Consulta *consultas[20];
 
     public:
-<<<<<<< HEAD
-        Socio(string ci, string nombre); 
-=======
         Socio(string ci, string nombre);
 		~Socio();
 
->>>>>>> 0b615632ab6e03b6e34e0ffc78a25277f2124552
         void setCI(string ci);
         string getCI();
         void setNombre(string nombre);

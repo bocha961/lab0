@@ -8,7 +8,7 @@ class Gato : public Mascota{
         TipoPelo tipoPelo;
     
     public:
-        Gato(string nombre, float peso, Genero genero, TipoPelo tipoPelo) : Mascota(string nombre, float peso, Genero genero);
+        Gato(string nombre, float peso, Genero genero, TipoPelo tipoPelo);
 		~Gato();
 
         float obtenerRacionDiaria();
