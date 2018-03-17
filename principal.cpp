@@ -41,6 +41,7 @@ void agregarMascota(string ci, const DtMascota &dtMascota){
 
 
 };
+asddas
 
 
 void registrarSocio(string ci, string nombre, const dtMascota &dtMascota){
