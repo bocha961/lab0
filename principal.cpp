@@ -274,6 +274,12 @@ void verMascotas(){
     imprimirMascotas(obtenerMascotas(ci, cant)); //Falta implementar imprimirMascotas
 }
 
+void removerSocio(){
+    cout << "Ingrese la cedula de identidad del socio que desea eliminar:";
+    string ci;
+    cin >> ci;
+    eliminarSocio(ci);
+}
 
 int main() {
 
@@ -311,6 +317,7 @@ int main() {
             verMascotas();
             break;
         case 6:
+            removerSocio();
             break;
         default: cout << " Ingrese una opcion correcta\n";
         }
