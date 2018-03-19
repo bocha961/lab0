@@ -124,14 +124,14 @@ DtMascota** obtenerMascotas(string ci, int &cantMascotas) {
 }
 
 void insertarSocio(){
-    cout << "Ingrese sus datos personales" << endl;
-    cout << "Ingrese su nombre: ";
+    cout << "Ingrese datos personales" << endl;
+    cout << "Ingrese el nombre del socio: ";
     string nombreSocio;
     cin >> nombreSocio;
-    cout << "Ingrese su cedula de identidad:";
+    cout << "Ingrese la cedula de identidad:";
     string ci;
     cin >> ci;
-    cout << "Ingrese datos de su mascota";
+    cout << "Ingrese datos de la mascota";
     cout << "Nombre:";
     string nombreMascota;
     cin >> nombreMascota;
@@ -142,7 +142,7 @@ void insertarSocio(){
     int userInput;
     cin >> userInput;
     Genero genero = static_cast<Genero>(userInput); //Nose si es asi para enum
-    cout << "Identifique a su mascota:\n";
+    cout << "Identifique a la mascota:\n";
     cout << " 1. Perro\n";
     cout << " 2. Gato \n";
     int opcionMascota;
@@ -150,7 +150,7 @@ void insertarSocio(){
     switch (opcionMascota) {
     case 1:
         //cargar datatype Perro
-        cout << "Ingrese la raza de su perro:";
+        cout << "Ingrese la raza del perro:";
         cin >> userInput;
         RazaPerro raza = static_cast<RazaPerro>(userInput); //Nose si es asi para enum
         cout << "Esta vacunado? (0-falso / 1-verdadero)";
@@ -164,7 +164,7 @@ void insertarSocio(){
 
     case 2:
 
-        cout << "Ingrese el tipo de pelo de su gato:";
+        cout << "Ingrese el tipo de pelo del gato:";
         cin >> userInput;
         TipoPelo tipoPelo = static_cast<TipoPelo>(userInput); //Nose si es asi para enum
 
@@ -173,6 +173,105 @@ void insertarSocio(){
         registrarSocio(ci, nombreSocio, dataGato);
         break;
     }
+}
+
+void insertarMascota(){
+    cout << "Ingrese la cedula de identidad del socio:";
+    string ci;
+    cin >> ci;
+    cout << "Ingrese datos de la mascota";
+    cout << "Nombre:";
+    string nombreMascota;
+    cin >> nombreMascota;
+    cout << "Peso:";
+    float peso;
+    cin >> peso;
+    cout << "Genero:";
+    int userInput;
+    cin >> userInput;
+    Genero genero = static_cast<Genero>(userInput); //Nose si es asi para enum
+    cout << "Identifique a la mascota:\n";
+    cout << " 1. Perro\n";
+    cout << " 2. Gato \n";
+    int opcionMascota;
+    cin >> opcionMascota;
+    switch (opcionMascota) {
+    case 1:
+        //cargar datatype Perro
+        cout << "Ingrese la raza del perro:";
+        cin >> userInput;
+        RazaPerro raza = static_cast<RazaPerro>(userInput); //Nose si es asi para enum
+        cout << "Esta vacunado? (0-falso / 1-verdadero)";
+        bool vacuna;
+        cin >> vacuna;
+
+        //carga un DTPerro
+        DtPerro *dataPerro = new DtPerro(nombreMascota, peso, genero, raza, vacuna);
+        agregarMascota(ci, dataPerro);
+        break;
+
+    case 2:
+
+        cout << "Ingrese el tipo de pelo del gato:";
+        cin >> userInput;
+        TipoPelo tipoPelo = static_cast<TipoPelo>(userInput); //Nose si es asi para enum
+
+        //cargar datatype gato
+        DtGato *dataGato = new DtGato(nombreMascota, peso, genero, tipoPelo);
+        agregarMascota(ci, dataGato);
+        break;
+    }
+
+}
+
+void insertarConsulta(){
+    cout << "Ingrese la cedula de identidad del socio:";
+    string ci;
+    cin >> ci;
+    cout << "Ingrese la consulta:";
+    string consulta;
+    cin >> consulta;
+    ingresarConsulta(consulta, ci);
+}
+
+void imprimirConsultas(DtConsulta** lista){
+
+}
+
+void verConsultas(){
+    cout << "Ingrese la fecha que quiera ver las consultas realizas hasta entonces";
+    cout << "Dia:";
+    int dia;
+    cin >> dia;
+    cout << "Mes:";
+    int mes;
+    cin >> mes;
+    cout << "Anio:";
+    int anio;
+    cin >> anio;
+    DtFecha fecha = new DtFecha(dia, mes, anio);
+    cout << "Ingrese la cedula de identidad del socio:";
+    string ci;
+    cin >> ci;
+    cout << "Ingrese la cantidad de consultas que desea ver:";
+    int cant;
+    cin >> cant;
+    imprimirConsultas(verConsultasAntesDeFecha(fecha, ci, cant)); //Falta implementar imprimirConsultas
+
+}
+
+void imprimirMascotas(DtMascota** lista){
+
+}
+
+void verMascotas(){
+    cout << "Ingrese la cedula de identidad del socio:";
+    string ci;
+    cin >> ci;
+    cout << "Ingrese la cantidad de mascotaque desea ver:";
+    int cant;
+    cin >> cant;
+    imprimirMascotas(obtenerMascotas(ci, cant)); //Falta implementar imprimirMascotas
 }
 
 
@@ -186,8 +285,8 @@ int main() {
         cout << " 2. Agregar mascota\n";
         cout << " 3. Insertar consulta\n";
         cout << " 4. Ver consultas antes de fecha\n";
-        cout << " 5. Eliminar socio\n";
-        cout << " 6. Ver mascotas de socio\n";
+        cout << " 5. Ver mascotas de socio\n";
+        cout << " 6. Eliminar socio\n";
         cout << " 0. Salir\n";
         cout << "\n Opcion:";
         cin >> opcion;
@@ -200,12 +299,16 @@ int main() {
             insertarSocio();
             break;
         case 2:
+            insertarMascota();
             break;
         case 3:
+            insertarConsulta();
             break;
         case 4:
+            verConsultas();
             break;
         case 5:
+            verMascotas();
             break;
         case 6:
             break;
@@ -213,15 +316,6 @@ int main() {
         }
 
     }
-
-
-
-
-
-
-
-
-
 
     return 0;
 };
