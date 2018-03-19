@@ -13,36 +13,49 @@
 #include "../Cabezales/Perro.h"
 #include "../Cabezales/Utils.h"
 
-using std::string;
+using namespace std;
 
 const int MAX_SOCIOS = 100;
-std::array < (Socio, MAX_SOCIOS + 1 > coleccionSocios;
 
-void agregar_a_coleccion(Socio &agregar) {
+struct coleccionSocios{
+    Socio *arraySocios[MAX_SOCIOS+1];
+    int tope;
+};
 
-    coleccionSocios->end() = agregar;
+typedef coleccionSocios *coleSocios;
 
-
+coleSocios crearColeSocios(){
+    coleSocios res = new coleccionSocios();
+    res->tope = 0;
+    return res;
 }
 
-int BuscarSocio(string ci, array coleccion) {
+//Arreglo auxiliar
+coleSocios socios;
+
+void agregar_a_coleccion(Socio *agregar) {
+    if(socios->tope < MAX_SOCIOS + 1){
+        socios->tope++;
+        socios->arraySocios[socios->tope] = agregar;
+    }
+}
+
+int buscarSocio(string ci) {
     int i= 0;
-    while (i <= tamanio &&  coleccionSocios[i]->CI != ci )
+    while (i <=socios->tope  &&  socios->arraySocios[i]->getCI() != ci )
         i++;
     return i;
 }
 
 void agregarMascota(string ci, const DtMascota &dtMascota) {
     //busco el socio en la coleccion
-    int tamanio = sizeof(coleccionSocios);
+    int tamanio = MAX_SOCIOS;
     //int i = 0;
     //busca el indice donde esta el socio
-    int i = BuscarSocio(ci, coleccionSocios);
+    int i = buscarSocio(ci);
     //aca va un try
     if (i <= tamanio) //Si se encuentra el socio, se agrega su mascota
-        coleccionSocios[i]->agregarMascota(dtMascota);
-
-
+        socios->arraySocios[i]->agregarMascota(dtMascota);
 };
 
 
@@ -56,7 +69,7 @@ void registrarSocio(string ci, string nombre, const DtMascota &dtMascota) { //ac
     int dia = tm_t2->tm_mday;
     int mes = tm_t2->tm_mon;
     int anio = tm_t2->tm_year;
-    DtFecha fechaIngreso = new DtFecha(dia, mes, anio);
+    DtFecha *fechaIngreso = new DtFecha(dia, mes, anio);
 
     Socio *nuevoSocio = new Socio(ci, nombre, fechaIngreso);
 
@@ -64,7 +77,7 @@ void registrarSocio(string ci, string nombre, const DtMascota &dtMascota) { //ac
 
     //try
     //agrega la mascota al vector de mascotas
-    nuevoSocio.agregarMascota(dtMascota);
+    nuevoSocio->agregarMascota(dtMascota);
 
     // Esta funcion deberia determinar si es Perro o Gato
 
@@ -75,44 +88,57 @@ void registrarSocio(string ci, string nombre, const DtMascota &dtMascota) { //ac
 
 };
 void ingresarConsulta(string motivo, string ci) {
-    int tamanio = coleccionSocios.size();
-
+    int tamanio = socios->tope;
     //busca el indice donde esta el socio
-    int i = BuscarSocio(ci, coleccionSocios);
+    /*
+     CREAR FUNCION OBTENER FECHA
+     */
+    
+    int i = buscarSocio(ci);
+    
+    time_t t1;
+    struct tm *tm_t2;
+    
+    time(&t1);
+    tm_t2 = localtime(&t1);
+    int dia = tm_t2->tm_mday;
+    int mes = tm_t2->tm_mon;
+    int anio = tm_t2->tm_year;
+    DtFecha *fecha = new DtFecha(dia, mes, anio);
     //aca va un try
     if (i <= tamanio) { //Si se encuentra el socio, se agrega su mascota
-        DtConsulta consulta = new DtConsulta(fecha, motivo);
-        coleccionSocios[i].agregarConsulta(consulta);
-    };
+        DtConsulta *consulta = new DtConsulta(fecha, motivo);
+        socios->arraySocios[i]->agregarConsulta(consulta);
+    }
 
 }
 
 DtConsulta** verConsultasAntesDeFecha(const DtFecha& fecha, string ciSocio, int& cantConsultas) {
-    int i = buscarSocio(ciSocio, coleccionSocios);
+    int i = buscarSocio(ciSocio);
     int j = 0;
-    DtConsulta** arregloCons = new DtConsulta[cantConsultas]; //arreglo que voy a devolver
-    DtConsulta** consultasHechas = coleccionSocios[i].getConsultas();
-    while ( consultasHechas[j].getFecha() < fecha ) {
+    DtConsulta *arregloRes = new DtConsulta[cantConsultas]; //arreglo que voy a devolver
+    DtConsulta *consultasHechas = socios->arraySocios[i].getConsultas();//arreglo de todas las consultas hechas 
+    while ( consultasHechas[j]->getFecha() < fecha ) {
         //Hago una copia del arreglo hasta la fecha
-        arregloCons[j] = new Consulta(consultasHechas.getFecha(), consultasHechas.getMotivo())
+        arregloRes[j] = new Consulta(consultasHechas.getFecha(), consultasHechas.getMotivo())
         j++;
 
-    } // Hay que sobrecargar el operador < para comparar fechas
+    }
 
 
 
-    return arregloCons;
+    return arregloRes;
 
 }
 void eliminarSocio(string ci) {
-    int i = BuscarSocio(ci, coleccionSocios);
+    int i = buscarSocio(ci);
     //Usar destructor de Socio
     // Segun Santi esto llama a todo implicitamente
     delete coleccionSocios[i];
 }
 
 DtMascota** obtenerMascotas(string ci, int &cantMascotas) {
-    int i = BuscarSocio(ci, coleccionSocios);
+    int i = buscarSocio(ci, coleccionSocios);
     int j = 0;
     DtMascota** arregloMascotas = new DtMascotas[cantMascotas];
     DtMascota** mascotasExistentes = coleccionSocios[i].getMascotas();
@@ -282,7 +308,8 @@ void removerSocio(){
 }
 
 int main() {
-
+    socios = crearColeSocios();
+    
     bool termino = false;
     int opcion;
     while (!termino) {

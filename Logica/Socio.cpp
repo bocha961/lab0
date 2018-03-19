@@ -10,7 +10,7 @@
 
 using std::string;
  
-Socio::Socio(string ci, string nombre, DtFecha fechaIngreso){
+Socio::Socio(string ci, string nombre, DtFecha *fechaIngreso){
     this->ci = ci;
     this->nombre = nombre;
 	this->fechaIngreso = fechaIngreso;
@@ -35,14 +35,14 @@ string Socio::getNombre(){
     return this->nombre;
 }
  
-void Socio::setFechaIngreso(DtFecha fecha){
+void Socio::setFechaIngreso(DtFecha *fecha){
     this->fechaIngreso = fecha;
 }
 DtFecha Socio::getFechaIngreso(){
     return this->fechaIngreso;
 }
 
-void Socio::agregarConsulta(DtConsulta datosConsulta){
+void Socio::agregarConsulta(DtConsulta *datosConsulta){
 	Consulta * nuevaConsulta = new Consulta(datosConsulta.getFecha(), datosConsulta.getMotivo());
 	int posicionAgregar = this->consultas.size(); // Esto no funciona, no esta size implementado, falta un tope. 
 	int capacidad = sizeof(this->consultas); // maximo del arreglo, lo cambie porque no funcionaba sino
@@ -59,7 +59,7 @@ Consulta* Socio::getConsultas(){
     return this->consultas; // return type does not match the function type
 }
 
-void Socio::agregarMascota(DtMascota datosMascota){
+void Socio::agregarMascota(const DtMascota *datosMascota){
 	int posicionAgregar = this->consultas.size();	
 	int capacidad = this->consultas.max_size(); // idem agregarConsulta
 

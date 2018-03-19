@@ -1,7 +1,7 @@
 #include "../Cabezales/DtConsulta.h"
 
 
-DtConsulta::DtConsulta(DtFecha fechaConsulta, string motivo){
+DtConsulta::DtConsulta(DtFecha *fechaConsulta, string motivo){
     this->fechaConsulta = fechaConsulta;
     this->motivo = motivo;
 }

@@ -3,14 +3,14 @@
 #include "../Cabezales/DtFecha.h"
 
 
-Consulta::Consulta(DtFecha fecha, string motivo){
+Consulta::Consulta(DtFecha *fecha, string motivo){
 	this->fechaConsulta = fecha;
 	this->motivo = motivo;
 }
 Consulta::~Consulta(){
 }
 
-void Consulta::setFecha(DtFecha fecha){
+void Consulta::setFecha(DtFecha *fecha){
     this->fechaConsulta = fecha;
 }
 DtFecha Consulta::getFecha(){

@@ -18,19 +18,19 @@ class Socio{
         Consulta *consultas[20];
 
     public:
-        Socio(string ci, string nombre, DtFecha fechaIngreso);
-		~Socio();
+        Socio(string ci, string nombre, DtFecha *fechaIngreso);
+	~Socio();
 
         void setCI(string ci);
         string getCI();
         void setNombre(string nombre);
         string getNombre();
-        void setFechaIngreso(DtFecha fecha);
+        void setFechaIngreso(DtFecha *fecha);
         DtFecha getFechaIngreso();
-		void agregarConsulta(DtConsulta nuevaConsulta);
+	void agregarConsulta(DtConsulta *nuevaConsulta);
         void setConsultas(Consulta* consultas);
         Consulta *getConsultas();
-		void agregarMascota(DtMascota nuevaMascota);
+	void agregarMascota(const DtMascota *nuevaMascota);
         void setMascotas(Mascota *mascotas);
         Mascota *getMascotas();
 };
