@@ -6,7 +6,7 @@ DtFecha::DtFecha(int dia, int mes, int anio){
     this->anio   = anio;
 }
 
-~DtFecha(){}
+DtFecha::~DtFecha() {}
 
 int DtFecha::getDia(){
     return this->dia;

@@ -3,12 +3,12 @@
 
 Perro::Perro (string nombre, float peso, Genero genero, RazaPerro raza, bool vacunaCachorro) : Mascota(nombre, peso, genero){
 	this->raza = raza;
-	this->vacunaCachorro = vacuna;
+	this->vacunaCachorro = vacunaCachorro;
 }
-~Perro::perro(){}
+Perro::~Perro(){}
 
-float Perro::obtenerRacionDiario(){
-    return (this->peso) * 0.025;
+float Perro::obtenerRacionDiaria(){
+    return this->getPeso() * 0.025;
 }
 
 RazaPerro Perro::getRazaPerro(){
@@ -21,6 +21,7 @@ void Perro::setRazaPerro(RazaPerro raza){
 bool Perro::getVacunaCachorro(){
     return this->vacunaCachorro;
 }
-void setVacunaCachorro(bool vacuna){
-    this->vacunaCachorro = vacuna;
+void Perro::setVacunaCachorro(bool vacuna) {
+	this->vacunaCachorro = vacuna;
 }
+

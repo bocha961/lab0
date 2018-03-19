@@ -1,15 +1,15 @@
-#include "../Laboratorio0/Ej1/Cabezales/Gato.h"
-#include "../Laboratorio0/Ej1/Cabezales/Mascota.h"
-
+#include "../Cabezales/Gato.h"
+#include "../Cabezales/Mascota.h"
+#include "../Cabezales/Utils.h"
 Gato::Gato(string nombre, float peso, Genero genero, TipoPelo tipoPelo) : Mascota(nombre, peso, genero){
 	this->tipoPelo = tipoPelo;
 }
-~Gato::Gato(){
+Gato::~Gato(){
 	
 }
 
-float Gato::obtenerRacionDiaria(float peso){
-    return peso*0.015;
+float Gato::obtenerRacionDiaria(){
+    return this->getPeso()*0.015;
 }
 
 void Gato::setTipoPelo(TipoPelo pelo){

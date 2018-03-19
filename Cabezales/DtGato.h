@@ -1,5 +1,5 @@
-#ifndef DATAGATO_H
-#define DATAGATO_H
+#ifndef DTGATO_H
+#define DTGATO_H
 
 // Write your header file here.
 #include <string>

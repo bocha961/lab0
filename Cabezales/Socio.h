@@ -18,7 +18,7 @@ class Socio{
         Consulta *consultas[20];
 
     public:
-        Socio(string ci, string nombre);
+        Socio(string ci, string nombre, DtFecha fechaIngreso);
 		~Socio();
 
         void setCI(string ci);

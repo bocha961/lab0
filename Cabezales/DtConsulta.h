@@ -1,5 +1,5 @@
-#ifndef DATACOSULTA_H
-#define DATACOSULTA_H
+#ifndef DTCOSULTA_H
+#define DTCOSULTA_H
 
 // Write your header file here.
 #include <string>

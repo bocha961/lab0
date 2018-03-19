@@ -1,5 +1,5 @@
-#ifndef DATAMASCOTA_H
-#define DATAMASCOTA_H
+#ifndef DTMASCOTA_H
+#define DTMASCOTA_H
 
 // Write your header file here.
 #include "Utils.h"
@@ -18,7 +18,7 @@ class DtMascota {
         ~DtMascota();
 
         string getNombre();
-        Genero getGebero();
+        Genero getGenero();
         float getPeso();
         float getRacionDiaria();
 };

@@ -4,10 +4,13 @@ DtMascota::DtMascota(string nombre, Genero genero, float peso, float racionDiari
     this->nombre         = nombre;
     this->genero         = genero;
     this->peso           = peso;
-    this->racionDiario   = racionDiaria;
+    this->racionDiaria   = racionDiaria;
 }
 
-~DtMascota(){}
+DtMascota::~DtMascota() {
+}
+
+
 
 string DtMascota::getNombre(){
     return this->nombre;
@@ -22,5 +25,5 @@ float DtMascota::getPeso(){
 }
 
 float DtMascota::getRacionDiaria(){
-    return this->racionDaria;
+    return this->racionDiaria;
 }

@@ -12,8 +12,8 @@ class Perro : public Mascota{
     public:
         Perro(string nombre, float peso, Genero genero, RazaPerro raza, bool vacunaCachorro);
 		~Perro();
-        float obtenerRacionDiaria();
         
+		float obtenerRacionDiaria();
         RazaPerro getRazaPerro();
         void setRazaPerro(RazaPerro raza);
         bool getVacunaCachorro();

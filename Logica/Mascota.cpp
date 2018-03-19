@@ -1,4 +1,4 @@
-#include "../Laboratorio0/Ej1/Cabezales/Mascota.h"
+#include "../Cabezales/Mascota.h"
 
 using std::string;
 
@@ -27,7 +27,7 @@ float Mascota::getPeso(){
     return this->peso;
 }
 
-void Mascota:setPeso(float peso){
+void Mascota::setPeso(float peso){
     this->peso = peso;
 }
 
