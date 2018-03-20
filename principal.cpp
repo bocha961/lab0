@@ -120,16 +120,16 @@ DtConsulta** verConsultasAntesDeFecha(const DtFecha& fecha, string ciSocio, int&
     int j = 0;
     DtConsulta **arregloRes[cantConsultas]; //arreglo que voy a devolver
     Consulta *consultasHechas = socios->arraySocios[i]->getConsultas();//arreglo de todas las consultas hechas 
-    
+    int lConsHechas = sizeof(consultasHechas) / sizeof(consultasHechas[0]);
+    for(i = 0; i < lConsHechas; i++){
+        
+    }
     while ( consultasHechas[j]->getFecha() < fecha ) {
         //Hago una copia del arreglo hasta la fecha
         arregloRes[j] = new Consulta(consultasHechas.getFecha(), consultasHechas.getMotivo());
         j++;
 
     }
-
-
-
     return arregloRes;
 
 }
@@ -137,14 +137,17 @@ void eliminarSocio(string ci) {
     int i = buscarSocio(ci);
     //Usar destructor de Socio
     // Segun Santi esto llama a todo implicitamente
-    delete coleccionSocios[i];
+    Socio *socioAux = socios->arraySocios[i];
+    socios->arraySocios[i] = socios->arraySocios[socios->tope];
+    delete socioAux;
+    socios->tope--;
 }
 
 DtMascota** obtenerMascotas(string ci, int &cantMascotas) {
     int i = buscarSocio(ci, coleccionSocios);
     int j = 0;
-    DtMascota** arregloMascotas = new DtMascotas[cantMascotas];
-    DtMascota** mascotasExistentes = coleccionSocios[i].getMascotas();
+    DtMascota **arregloMascotas = new DtMascotas[cantMascotas];
+    DtMascota **mascotasExistentes = coleccionSocios[i].getMascotas();
     while (j < cantMascotas) {
         arregloMascotas[j] = mascotasExistentes[j];
         j++;
