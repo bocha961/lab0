@@ -10,14 +10,13 @@
 #include "DtMascota.h"
 
 using std::string;
-using std::array;
 
 class Socio{
     private:
         string ci, nombre;
         DtFecha* fechaIngreso;
         Mascota** mascotas;
-        Consulta** consultas;
+        Consulta* consultas;
 
     public:
         Socio(string ci, string nombre, DtFecha *fechaIngreso);
