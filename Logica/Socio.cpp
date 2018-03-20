@@ -15,7 +15,7 @@ Socio::Socio(string ci, string nombre, DtFecha *fechaIngreso){
     this->nombre = nombre;
     this->fechaIngreso = fechaIngreso;
     this->mascotas = new Mascota*[10];
-    this->consultas= new Consulta*[20];
+    this->consultas= new Consulta[20];
 }
 Socio::~Socio(){
 	delete[] this->mascotas;
