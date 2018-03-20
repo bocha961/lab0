@@ -1,6 +1,7 @@
 #include <iostream>
 #include <array>
 #include <ctime>
+#include <string>
 #include "../Cabezales/Socio.h"
 #include "../Cabezales/Consulta.h"
 #include "../Cabezales/DtConsulta.h"
@@ -50,13 +51,14 @@ int buscarSocio(string ci) {
 void agregarMascota(string ci, const DtMascota &dtMascota) {
     //busco el socio en la coleccion
     int tamanio = MAX_SOCIOS;
+    const DtMascota *mascotaAux = &dtMascota;
     //int i = 0;
     //busca el indice donde esta el socio
     int i = buscarSocio(ci);
     //aca va un try
     if (i <= tamanio) //Si se encuentra el socio, se agrega su mascota
-        socios->arraySocios[i]->agregarMascota(dtMascota);
-};
+        socios->arraySocios[i]->agregarMascota(mascotaAux);
+}
 
 
 void registrarSocio(string ci, string nombre, const DtMascota &dtMascota) { //aca?
@@ -72,21 +74,21 @@ void registrarSocio(string ci, string nombre, const DtMascota &dtMascota) { //ac
     DtFecha *fechaIngreso = new DtFecha(dia, mes, anio);
 
     Socio *nuevoSocio = new Socio(ci, nombre, fechaIngreso);
-
-    //Usar fecha del sistema (ni idea como gg ekide)
-
+    
+    const DtMascota *mascotaAux = &dtMascota;
+    
     //try
     //agrega la mascota al vector de mascotas
-    nuevoSocio->agregarMascota(dtMascota);
+    nuevoSocio->agregarMascota(mascotaAux);
 
     // Esta funcion deberia determinar si es Perro o Gato
 
     //cuando termina de cargar el objeto Socio, lo deberia agregar a la coleccion
     //deberia tener una operacion para agregar a la coleccion de socios
     agregar_a_coleccion(nuevoSocio);
+}
 
 
-};
 void ingresarConsulta(string motivo, string ci) {
     int tamanio = socios->tope;
     //busca el indice donde esta el socio
@@ -116,11 +118,12 @@ void ingresarConsulta(string motivo, string ci) {
 DtConsulta** verConsultasAntesDeFecha(const DtFecha& fecha, string ciSocio, int& cantConsultas) {
     int i = buscarSocio(ciSocio);
     int j = 0;
-    DtConsulta *arregloRes = new DtConsulta[cantConsultas]; //arreglo que voy a devolver
-    DtConsulta *consultasHechas = socios->arraySocios[i].getConsultas();//arreglo de todas las consultas hechas 
+    DtConsulta **arregloRes[cantConsultas]; //arreglo que voy a devolver
+    Consulta *consultasHechas = socios->arraySocios[i]->getConsultas();//arreglo de todas las consultas hechas 
+    
     while ( consultasHechas[j]->getFecha() < fecha ) {
         //Hago una copia del arreglo hasta la fecha
-        arregloRes[j] = new Consulta(consultasHechas.getFecha(), consultasHechas.getMotivo())
+        arregloRes[j] = new Consulta(consultasHechas.getFecha(), consultasHechas.getMotivo());
         j++;
 
     }
