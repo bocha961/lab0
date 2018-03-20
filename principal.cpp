@@ -50,8 +50,8 @@ int buscarSocio(string ci) {
 
 void agregarMascota(string ci, const DtMascota &dtMascota) {
     //busco el socio en la coleccion
-    int tamanio = MAX_SOCIOS;
-    const DtMascota *mascotaAux = &dtMascota;
+    int tamanio = MAX_SOCIOS;   
+    DtMascota *mascotaAux = (DtMascota *)&dtMascota;
     //int i = 0;
     //busca el indice donde esta el socio
     int i = buscarSocio(ci);
@@ -75,7 +75,7 @@ void registrarSocio(string ci, string nombre, const DtMascota &dtMascota) { //ac
 
     Socio *nuevoSocio = new Socio(ci, nombre, fechaIngreso);
     
-    const DtMascota *mascotaAux = &dtMascota;
+    DtMascota *mascotaAux = (DtMascota *)&dtMascota;
     
     //try
     //agrega la mascota al vector de mascotas
@@ -115,10 +115,10 @@ void ingresarConsulta(string motivo, string ci) {
 
 }
 
-bool esMenorFecha(const DtFecha& fecha1, const DtFecha& fecha2){
-    DtFecha aux1= fecha1;
-    DtFecha aux2= fecha2;
-    if ((aux1.getAnio() <= aux2.getAnio()) && (aux1.getMes() <= aux2.getMes()) && (aux1.getDia() <= aux2.getDia())) {
+bool esMenorFecha(DtFecha *fecha1, DtFecha *fecha2){
+    DtFecha *aux1= fecha1;
+    DtFecha *aux2= fecha2;
+    if ((aux1->getAnio() <= aux2->getAnio()) && (aux1->getMes() <= aux2->getMes()) && (aux1->getDia() <= aux2->getDia())) {
         return true;
     }
     else return false;
@@ -127,20 +127,20 @@ bool esMenorFecha(const DtFecha& fecha1, const DtFecha& fecha2){
 DtConsulta** verConsultasAntesDeFecha(const DtFecha& fecha, string ciSocio, int& cantConsultas) {
     int i = buscarSocio(ciSocio);
     int j = 0;
-    DtConsulta **arregloRes[cantConsultas]; //arreglo que voy a devolver
-    Consulta *consultasHechas = socios->arraySocios[i]->getConsultas();//arreglo de todas las consultas hechas 
+    DtConsulta *arregloRes[cantConsultas]; //arreglo que voy a devolver
+    Consulta **consultasHechas = socios->arraySocios[i]->getConsultas();//arreglo de todas las consultas hechas 
+    DtFecha *fechaAux = (DtFecha *)&fecha;
     
-    while ( esMenorFecha(consultasHechas[j].getFecha(), fecha)) {
+    while ( esMenorFecha(consultasHechas[j]->getFecha(), fechaAux)) {
         //Hago una copia del arreglo hasta la fecha
-        arregloRes[j] = new Consulta(consultasHechas[j].getFecha(), consultasHechas[j].getMotivo());
+        //Esto esta Mal ya que no son tipos compatibles
+        arregloRes[j] = new DtConsulta(consultasHechas[j]->getFecha(), consultasHechas[j]->getMotivo());
         j++;
 
     }
+    DtConsulta **res = arregloRes;
 
-
-
-    return arregloRes;
-
+    return res;
 }
 void eliminarSocio(string ci) {
     int i = buscarSocio(ci);
