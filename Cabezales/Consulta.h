@@ -7,15 +7,16 @@ using std::string;
 
 class Consulta{
     private:
-        DtFecha fechaConsulta;
+        DtFecha* fechaConsulta;
         string motivo;
 
     public:
         Consulta(DtFecha *fecha, string motivo); //Constructor por defecto
-		~Consulta();
+        Consulta();
+	~Consulta();
 
         void setFecha(DtFecha *fecha);
-        DtFecha getFecha();
+        DtFecha* getFecha();
         void setMotivo(string motivo);
         string getMotivo();
 

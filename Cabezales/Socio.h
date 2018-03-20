@@ -2,6 +2,7 @@
 #define SOCIO_H
 
 #include <string>
+#include <array>
 #include "Mascota.h"
 #include "Consulta.h"
 #include "DtFecha.h"
@@ -9,13 +10,14 @@
 #include "DtMascota.h"
 
 using std::string;
+using std::array;
 
 class Socio{
     private:
         string ci, nombre;
-        DtFecha fechaIngreso;
-        Mascota *mascotas[10];
-        Consulta *consultas[20];
+        DtFecha* fechaIngreso;
+        Mascota** mascotas;
+        Consulta** consultas;
 
     public:
         Socio(string ci, string nombre, DtFecha *fechaIngreso);
@@ -26,13 +28,13 @@ class Socio{
         void setNombre(string nombre);
         string getNombre();
         void setFechaIngreso(DtFecha *fecha);
-        DtFecha getFechaIngreso();
+        DtFecha* getFechaIngreso();
 	void agregarConsulta(DtConsulta *nuevaConsulta);
-        void setConsultas(Consulta* consultas);
-        Consulta *getConsultas();
-	void agregarMascota(const DtMascota *nuevaMascota);
-        void setMascotas(Mascota *mascotas);
-        Mascota *getMascotas();
+        void setConsultas(Consulta** consultas);
+        Consulta **getConsultas();
+	void agregarMascota(DtMascota *nuevaMascota);
+        void setMascotas(Mascota **mascotas);
+        Mascota **getMascotas();
 };
 
 

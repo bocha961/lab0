@@ -10,13 +10,13 @@ using namespace std;
 
 class DtConsulta {
     private:
-        DtFecha fechaConsulta;
+        DtFecha* fechaConsulta;
         string motivo;
 
     public:
         DtConsulta(DtFecha *fechaConsulta, string motivo); //Constructor de la clase
         ~DtConsulta();
-        DtFecha getFecha();
+        DtFecha* getFecha();
         string getMotivo();
 };
 

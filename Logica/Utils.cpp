@@ -1,5 +1,7 @@
-#include "../Cabezales/Utils.h
+#include "../Cabezales/Utils.h"
 #include <iostream>
+
+using namespace std;
 
 string generoString(Genero g){
     string res = "";
@@ -44,12 +46,13 @@ string razaPerroString(RazaPerro r){
 
 string tipoPeloString(TipoPelo t){
     string res = "";
-    switch(r){
+    switch(t){
         case corto:
             res = "Corto";
         break;
-        case meadiano:
+        case mediano:
             res = "Mediano";
         break;
     }
+    return res;
 }

@@ -9,7 +9,7 @@ DtConsulta::DtConsulta(DtFecha *fechaConsulta, string motivo){
 DtConsulta::~DtConsulta(){
 }
 
-DtFecha DtConsulta::getFecha(){
+DtFecha* DtConsulta::getFecha(){
     return this->fechaConsulta;
 }
 

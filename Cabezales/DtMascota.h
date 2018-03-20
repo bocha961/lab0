@@ -15,7 +15,7 @@ class DtMascota {
 
     public:
         DtMascota(string nombre, Genero genero, float peso, float racionDiaria);
-        ~DtMascota();
+        virtual ~DtMascota();
 
         string getNombre();
         Genero getGenero();

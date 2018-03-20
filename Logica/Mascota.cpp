@@ -1,4 +1,4 @@
-#include "../Laboratorio0/Ej1/Cabezales/Mascota.h"
+#include "../Cabezales/Mascota.h"
 
 using std::string;
 
@@ -8,9 +8,7 @@ Mascota::Mascota(string nombre, float peso, Genero genero){
 	this->genero	= genero;
 }
 
-Mascota::~Mascota(){
-	delete this->genero;
-}
+Mascota::~Mascota(){}
 
 Genero Mascota::getGenero(){
     return this->genero;
@@ -31,7 +29,7 @@ float Mascota::getPeso(){
     return this->peso;
 }
 
-void Mascota:setPeso(float peso){
+void Mascota::setPeso(float peso){
     this->peso = peso;
 }
 

@@ -3,7 +3,7 @@
 // Write your header file here.
 #include <string>
 
-using std::string;
+using namespace std;
 
 enum Genero{macho, hembra};
 

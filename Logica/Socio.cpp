@@ -13,7 +13,9 @@ using std::string;
 Socio::Socio(string ci, string nombre, DtFecha *fechaIngreso){
     this->ci = ci;
     this->nombre = nombre;
-	this->fechaIngreso = fechaIngreso;
+    this->fechaIngreso = fechaIngreso;
+    this->mascotas = new Mascota*[10];
+    this->consultas= new Consulta*[20];
 }
 Socio::~Socio(){
 	delete[] this->mascotas;
@@ -38,55 +40,62 @@ string Socio::getNombre(){
 void Socio::setFechaIngreso(DtFecha *fecha){
     this->fechaIngreso = fecha;
 }
-DtFecha Socio::getFechaIngreso(){
+DtFecha* Socio::getFechaIngreso(){
     return this->fechaIngreso;
 }
 
 void Socio::agregarConsulta(DtConsulta *datosConsulta){
-	Consulta * nuevaConsulta = new Consulta(datosConsulta.getFecha(), datosConsulta.getMotivo());
-	int posicionAgregar = this->consultas.size(); // Esto no funciona, no esta size implementado, falta un tope. 
+	Consulta* nuevaConsulta = new Consulta(datosConsulta->getFecha(), datosConsulta->getMotivo());
 	int capacidad = sizeof(this->consultas); // maximo del arreglo, lo cambie porque no funcionaba sino
-
+        int posicionAgregar = 0;
+        
+        while(posicionAgregar < capacidad && this->consultas[posicionAgregar] != NULL)
+            posicionAgregar++;
+        
 	if(posicionAgregar < capacidad)
 		this->consultas[posicionAgregar] = nuevaConsulta;
 	else
 		throw std::range_error("Maximo de consultas");
 }
-void Socio::setConsultas(Consulta* consultas){
+void Socio::setConsultas(Consulta** consultas){
     this->consultas = consultas; // must be a modifiable lvalue wtf??
 }
-Consulta* Socio::getConsultas(){
+Consulta** Socio::getConsultas(){
     return this->consultas; // return type does not match the function type
 }
 
-void Socio::agregarMascota(const DtMascota *datosMascota){
-	int posicionAgregar = this->consultas.size();	
-	int capacidad = this->consultas.max_size(); // idem agregarConsulta
+void Socio::agregarMascota(DtMascota *datosMascota){
+    int capacidad = sizeof(this->mascotas)/sizeof(this->mascotas[0]); // idem agregarConsulta
+    int posicionAgregar;
+    while(posicionAgregar < capacidad && this->mascotas[posicionAgregar] != NULL)
+        posicionAgregar++;
+	
 
-	if(posicionAgregar < capacidad){
-		DtPerro datosMascotaPerro	= dynamic_cast<DtPerro*>(datosMascota); // The operand of a pointer dynamic_cast must be a pointer to a complete class
-		DtGato datosMascotaGato		= dynamic_cast<DtGato*>(datosMascota); // subraya en datosMascota, ni idea que es 
+    if(posicionAgregar < capacidad){
+        
+	DtPerro* datosMascotaPerro  = dynamic_cast<DtPerro*>(datosMascota); // The operand of a pointer dynamic_cast must be a pointer to a complete class
+	DtGato* datosMascotaGato    = dynamic_cast<DtGato*>(datosMascota); // subraya en datosMascota, ni idea que es 
 
-		Mascota* nuevaMascota;
-		if(datosMascotaPerro != NULL){ // Esto no tiene sentido DtPerro != int hay que preguntar distinto.
-			nuevaMascota = new Perro(	datosMascotaPerro.getNombre(),
-												datosMascotaPerro.getPeso(),
-												datosMascotaPerro.getGenero(),
-												datosMascotaPerro.getRazaPerro(),
-												datosMascotaPerro.getVacunaCachorro());
+	Mascota* nuevaMascota;
+        if(datosMascotaPerro != NULL){ // Esto no tiene sentido DtPerro != int hay que preguntar distinto.
+            nuevaMascota = new Perro(	datosMascotaPerro->getNombre(),
+												datosMascotaPerro->getPeso(),
+												datosMascotaPerro->getGenero(),
+												datosMascotaPerro->getRazaPerro(),
+												datosMascotaPerro->getVacunaCachorro());
 		}else{
-			nuevaMascota = new Gato(	datosMascotaGato.getNombre(),
-												datosMascotaGato.getPeso(),	
-												datosMascotaGato.getGenero(),
-												datosMascotaGato.getTipoPelo());
+			nuevaMascota = new Gato(	datosMascotaGato->getNombre(),
+												datosMascotaGato->getPeso(),	
+												datosMascotaGato->getGenero(),
+												datosMascotaGato->getTipoPelo());
 		}
 		this->mascotas[posicionAgregar] = nuevaMascota;
 	}else
 		throw std::range_error("Maximo de mascotas");
 }
-void Socio::setMascotas(Mascota* mascotas){
+void Socio::setMascotas(Mascota** mascotas){
     this->mascotas = mascotas; //must be a modifiable lvalue
 }
-Mascota* Socio::getMascotas(){
+Mascota** Socio::getMascotas(){
     return this->mascotas; //must be a modifiable lvalue
 }

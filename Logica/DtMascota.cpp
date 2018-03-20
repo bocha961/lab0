@@ -10,8 +10,6 @@ DtMascota::DtMascota(string nombre, Genero genero, float peso, float racionDiari
 DtMascota::~DtMascota() {
 }
 
-
-
 string DtMascota::getNombre(){
     return this->nombre;
 }

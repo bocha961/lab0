@@ -7,13 +7,15 @@ Consulta::Consulta(DtFecha *fecha, string motivo){
 	this->fechaConsulta = fecha;
 	this->motivo = motivo;
 }
+Consulta::Consulta(){}
 Consulta::~Consulta(){
+    delete this->fechaConsulta;
 }
 
 void Consulta::setFecha(DtFecha *fecha){
     this->fechaConsulta = fecha;
 }
-DtFecha Consulta::getFecha(){
+DtFecha* Consulta::getFecha(){
     return this->fechaConsulta;
 }
 
