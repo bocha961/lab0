@@ -115,21 +115,30 @@ void ingresarConsulta(string motivo, string ci) {
 
 }
 
+bool esMenorFecha(const DtFecha& fecha1, const DtFecha& fecha2){
+    DtFecha aux1= fecha1;
+    DtFecha aux2= fecha2;
+    if ((aux1.getAnio() <= aux2.getAnio()) && (aux1.getMes() <= aux2.getMes()) && (aux1.getDia() <= aux2.getDia())) {
+        return true;
+    }
+    else return false;
+}
+
 DtConsulta** verConsultasAntesDeFecha(const DtFecha& fecha, string ciSocio, int& cantConsultas) {
     int i = buscarSocio(ciSocio);
     int j = 0;
     DtConsulta **arregloRes[cantConsultas]; //arreglo que voy a devolver
     Consulta *consultasHechas = socios->arraySocios[i]->getConsultas();//arreglo de todas las consultas hechas 
-    int lConsHechas = sizeof(consultasHechas) / sizeof(consultasHechas[0]);
-    for(i = 0; i < lConsHechas; i++){
-        
-    }
-    while ( consultasHechas[j]->getFecha() < fecha ) {
+    
+    while ( esMenorFecha(consultasHechas[j].getFecha(), fecha)) {
         //Hago una copia del arreglo hasta la fecha
-        arregloRes[j] = new Consulta(consultasHechas.getFecha(), consultasHechas.getMotivo());
+        arregloRes[j] = new Consulta(consultasHechas[j].getFecha(), consultasHechas[j].getMotivo());
         j++;
 
     }
+
+
+
     return arregloRes;
 
 }
@@ -144,10 +153,10 @@ void eliminarSocio(string ci) {
 }
 
 DtMascota** obtenerMascotas(string ci, int &cantMascotas) {
-    int i = buscarSocio(ci, coleccionSocios);
+    int i = buscarSocio(ci);
     int j = 0;
-    DtMascota **arregloMascotas = new DtMascotas[cantMascotas];
-    DtMascota **mascotasExistentes = coleccionSocios[i].getMascotas();
+    DtMascota** arregloMascota = new DtMascotas[cantMascotas];
+    DtMascota** mascotasExistentes = coleccionSocios[i].getMascotas();
     while (j < cantMascotas) {
         arregloMascotas[j] = mascotasExistentes[j];
         j++;
@@ -180,19 +189,51 @@ void insertarSocio(){
     int opcionMascota;
     cin >> opcionMascota;
     switch (opcionMascota) {
-    case 1:
+    case 1:{
         //cargar datatype Perro
         cout << "Ingrese la raza del perro:";
-        cin >> userInput;
-        RazaPerro raza = static_cast<RazaPerro>(userInput); //Nose si es asi para enum
+        cout << " 0. Labrador\n";
+        cout << " 1. Ovejero\n";
+        cout << " 2. Bulldog\n";
+        cout << " 3. Pitbull\n";
+        cout << " 4. Collie\n";
+        cout << " 5. Pekines\n";
+        cout << " 6. Otro\n";
+        int opcionRaza;
+        RazaPerro raza;
+        switch (opcionRaza) {
+            case 0:
+                raza= labrador;
+            break;
+            case 1:
+                raza= ovejero;
+            break;
+            case 2:
+                raza= bulldog;
+            break;
+            case 3:
+                raza= pitbull;
+            break;
+            case 4:
+                raza= collie;
+            break;
+            case 5:
+                raza= pekines;
+            break;
+            case 6:
+                raza= otro;
+            break;
+                
+        }
         cout << "Esta vacunado? (0-falso / 1-verdadero)";
         bool vacuna;
         cin >> vacuna;
 
         //carga un DTPerro
-        DtPerro *dataPerro = new DtPerro(nombreMascota, peso, genero, raza, vacuna);
-        registrarSocio(ci, nombreSocio, dataPerro);
-        break;
+        DtPerro *dataPerro = new DtPerro(nombreMascota, genero, peso, raza, vacuna);
+        const DtPerro auxPerro= *dataPerro;
+        registrarSocio(ci, nombreSocio, auxPerro);
+        break;}
 
     case 2:
 
@@ -201,8 +242,9 @@ void insertarSocio(){
         TipoPelo tipoPelo = static_cast<TipoPelo>(userInput); //Nose si es asi para enum
 
         //cargar datatype gato
-        DtGato *dataGato = new DtGato(nombreMascota, peso, genero, tipoPelo);
-        registrarSocio(ci, nombreSocio, dataGato);
+        DtGato *dataGato = new DtGato(nombreMascota, genero, peso, tipoPelo);
+        const DtGato auxGato= *dataGato;
+        registrarSocio(ci, nombreSocio, auxGato);
         break;
     }
 }
@@ -228,19 +270,51 @@ void insertarMascota(){
     int opcionMascota;
     cin >> opcionMascota;
     switch (opcionMascota) {
-    case 1:
+    case 1:{
         //cargar datatype Perro
         cout << "Ingrese la raza del perro:";
-        cin >> userInput;
-        RazaPerro raza = static_cast<RazaPerro>(userInput); //Nose si es asi para enum
+        cout << " 0. Labrador\n";
+        cout << " 1. Ovejero\n";
+        cout << " 2. Bulldog\n";
+        cout << " 3. Pitbull\n";
+        cout << " 4. Collie\n";
+        cout << " 5. Pekines\n";
+        cout << " 6. Otro\n";
+        int opcionRaza;
+        RazaPerro raza;
+        switch (opcionRaza) {
+            case 0:
+                raza= labrador;
+            break;
+            case 1:
+                raza= ovejero;
+            break;
+            case 2:
+                raza= bulldog;
+            break;
+            case 3:
+                raza= pitbull;
+            break;
+            case 4:
+                raza= collie;
+            break;
+            case 5:
+                raza= pekines;
+            break;
+            case 6:
+                raza= otro;
+            break;
+                
+        }
         cout << "Esta vacunado? (0-falso / 1-verdadero)";
         bool vacuna;
         cin >> vacuna;
 
         //carga un DTPerro
-        DtPerro *dataPerro = new DtPerro(nombreMascota, peso, genero, raza, vacuna);
-        agregarMascota(ci, dataPerro);
-        break;
+        DtPerro *dataPerro = new DtPerro(nombreMascota, genero, peso, raza, vacuna);
+        const DtPerro auxPerro= *dataPerro;
+        agregarMascota(ci, auxPerro);
+        break;}
 
     case 2:
 
@@ -249,8 +323,9 @@ void insertarMascota(){
         TipoPelo tipoPelo = static_cast<TipoPelo>(userInput); //Nose si es asi para enum
 
         //cargar datatype gato
-        DtGato *dataGato = new DtGato(nombreMascota, peso, genero, tipoPelo);
-        agregarMascota(ci, dataGato);
+        DtGato *dataGato = new DtGato(nombreMascota, genero, peso, tipoPelo);
+        const DtGato auxGato= *dataGato;
+        agregarMascota(ci, auxGato);
         break;
     }
 
