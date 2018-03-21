@@ -448,19 +448,20 @@ void verMascotas() {
     DtMascota** lista = obtenerMascotas(ci, cant); //Falta implementar imprimirMascotas
     int i = 0;
     while (i < cant) {
-        cout << i + 1 << ". " << lista[i]->getNombre();
+        cout << "Mascota #" << i + 1;
+        cout<< "Nombre: " << lista[i]->getNombre();
         cout << "Genero: " << lista[i]->getGenero();
-        cout << "Peso: " << lista[i]->getPeso() << "Kg";
-        cout << "Racion diaria: " << lista[i]->getRacionDiaria() << "Kg";
+        cout << "Peso: " << lista[i]->getPeso() << "kg";
+        cout << "Racion diaria: " << lista[i]->getRacionDiaria() << "gramos";
         DtPerro* datosMascotaPerro = dynamic_cast<DtPerro*>(lista[i]);
         DtGato* datosMascotaGato    = dynamic_cast<DtGato*>(lista[i]);
         if (datosMascotaPerro != NULL) {
             cout << "Raza: " << datosMascotaPerro->getRazaPerro();
             if (datosMascotaPerro->getVacunaCachorro()) {
-                cout << "Vacunado: Si";
+                cout << "Tiene vacuna del cachorro: Si";
             }
             else {
-                cout << "Vacunado: No";
+                cout << "Tiene vacuna del cachorro: No";
             }
         }
         else {
@@ -519,7 +520,7 @@ int main() {
             break;
         default: cout << " Ingrese una opcion correcta\n";
         }
-
+    
     }
 
     return 0;

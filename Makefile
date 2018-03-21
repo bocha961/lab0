@@ -15,7 +15,7 @@ HDIR = Cabezales
 CPPDIR = Logica
 ODIR = Obj
 
-MODULES = Consulta DataConsulta DataGato DataMascota DataPerro Fecha Gato Mascota Perro Socio Utils
+MODULES = Consulta DtConsulta DtGato DtMascota DtPerro DtFecha Gato Mascota Perro Socio Utils
 
 #lista de archivos, con directorio y extension
 HS = $(MODULES:%=$(HDIR)/%.h)
