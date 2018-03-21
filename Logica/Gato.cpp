@@ -9,7 +9,7 @@ Gato::~Gato(){
 }
 
 float Gato::obtenerRacionDiaria(){
-    return this->getPeso()*0.015;
+    return this->getPeso() * 0.015;
 }
 
 void Gato::setTipoPelo(TipoPelo pelo){

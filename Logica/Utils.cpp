@@ -53,6 +53,9 @@ string tipoPeloString(TipoPelo t){
         case mediano:
             res = "Mediano";
         break;
+        case largo:
+            res = "Largo";
+        break;
     }
     return res;
 }

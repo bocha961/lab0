@@ -15,7 +15,7 @@ Socio::Socio(string ci, string nombre, DtFecha *fechaIngreso){
     this->nombre = nombre;
     this->fechaIngreso = fechaIngreso;
     this->mascotas = new Mascota*[10];
-    this->consultas= new Consulta[20];
+    this->consultas= new Consulta*[20];
 }
 Socio::~Socio(){
 	delete[] this->mascotas;
@@ -65,19 +65,20 @@ Consulta** Socio::getConsultas(){
 }
 
 void Socio::agregarMascota(DtMascota *datosMascota){
-    int capacidad = sizeof(this->mascotas)/sizeof(this->mascotas[0]); // idem agregarConsulta
-    int posicionAgregar;
+    int capacidad = getSizeMascotas();
+    int posicionAgregar = 0;
+    
     while(posicionAgregar < capacidad && this->mascotas[posicionAgregar] != NULL)
         posicionAgregar++;
 	
 
-    if(posicionAgregar < capacidad){
+    if(posicionAgregar <= capacidad){
         
 	DtPerro* datosMascotaPerro  = dynamic_cast<DtPerro*>(datosMascota); // The operand of a pointer dynamic_cast must be a pointer to a complete class
 	DtGato* datosMascotaGato    = dynamic_cast<DtGato*>(datosMascota); // subraya en datosMascota, ni idea que es 
 
 	Mascota* nuevaMascota;
-        if(datosMascotaPerro != NULL){ // Esto no tiene sentido DtPerro != int hay que preguntar distinto.
+        if(datosMascotaPerro != NULL){ 
             nuevaMascota = new Perro(	datosMascotaPerro->getNombre(),
 												datosMascotaPerro->getPeso(),
 												datosMascotaPerro->getGenero(),
@@ -98,4 +99,12 @@ void Socio::setMascotas(Mascota** mascotas){
 }
 Mascota** Socio::getMascotas(){
     return this->mascotas; //must be a modifiable lvalue
+}
+
+const int Socio::getSizeMascotas(){
+    return this->sizeMascotas;
+}
+
+const int Socio::getSizeConsultas(){
+    return this->sizeConsultas;
 }

@@ -16,7 +16,9 @@ class Socio{
         string ci, nombre;
         DtFecha* fechaIngreso;
         Mascota** mascotas;
-        Consulta* consultas;
+        const int sizeMascotas = 10;
+        Consulta** consultas;
+        const int sizeConsultas = 20;
 
     public:
         Socio(string ci, string nombre, DtFecha *fechaIngreso);
@@ -34,6 +36,8 @@ class Socio{
 	void agregarMascota(DtMascota *nuevaMascota);
         void setMascotas(Mascota **mascotas);
         Mascota **getMascotas();
+        const int getSizeMascotas();
+        const int getSizeConsultas();
 };
 
 
