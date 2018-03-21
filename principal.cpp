@@ -155,13 +155,16 @@ void eliminarSocio(string ci) {
 DtMascota** obtenerMascotas(string ci, int &cantMascotas) {
     int i = buscarSocio(ci);
     int j = 0;
-    DtMascota** arregloMascota = new DtMascotas[cantMascotas];
-    DtMascota** mascotasExistentes = coleccionSocios[i].getMascotas();
+    /*DtMascota** arregloMascota = new DtMascota[cantMascotas];
+    DtMascota** mascotasExistentes = coleccionSocios[i].getMascotas();*/
+    
+    DtMascota** arregloMascota[cantMascotas];
+    DtMascota** mascotasExistentes = socios->arraySocios[i]->getMascotas();
     while (j < cantMascotas) {
-        arregloMascotas[j] = mascotasExistentes[j];
+        arregloMascota[j] = mascotasExistentes[j];
         j++;
     }
-    return arregloMascotas;
+    return arregloMascota;
 }
 
 void insertarSocio(){
@@ -341,10 +344,6 @@ void insertarConsulta(){
     ingresarConsulta(consulta, ci);
 }
 
-void imprimirConsultas(DtConsulta** lista){
-
-}
-
 void verConsultas(){
     cout << "Ingrese la fecha que quiera ver las consultas realizas hasta entonces";
     cout << "Dia:";
@@ -356,18 +355,25 @@ void verConsultas(){
     cout << "Anio:";
     int anio;
     cin >> anio;
-    DtFecha fecha = new DtFecha(dia, mes, anio);
+    DtFecha *fecha = new DtFecha(dia, mes, anio);
     cout << "Ingrese la cedula de identidad del socio:";
     string ci;
     cin >> ci;
     cout << "Ingrese la cantidad de consultas que desea ver:";
     int cant;
     cin >> cant;
-    imprimirConsultas(verConsultasAntesDeFecha(fecha, ci, cant)); //Falta implementar imprimirConsultas
-
-}
-
-void imprimirMascotas(DtMascota** lista){
+    DtConsulta** lista= verConsultasAntesDeFecha(fecha, ci, cant); //Falta implementar imprimirConsultas
+    int i= 0;
+    while (i < cant){
+        DtFecha *fecha_i= lista[i]->getFecha();
+        int dia_i= fecha_i->getDia;
+        int mes_i= lista[i]->getFecha()->getMes;
+        int anio_i= lista[i]->getFecha()->getAnio;
+        cout<< "Consulta #" << i + 1 << " fecha:" << dia_i << "/" << mes_i << "/" << anio_i;
+        cout<< "Motivo:\n";
+        cout<< lista[i]->getMotivo();
+        i++;
+    }
 
 }
 
@@ -378,7 +384,30 @@ void verMascotas(){
     cout << "Ingrese la cantidad de mascotaque desea ver:";
     int cant;
     cin >> cant;
-    imprimirMascotas(obtenerMascotas(ci, cant)); //Falta implementar imprimirMascotas
+    DtMascota** lista= obtenerMascotas(ci, cant); //Falta implementar imprimirMascotas
+    int i= 0;
+    while (i < cant){
+        cout<< i + 1<< ". " << lista[i]->getNombre();
+        cout<< "Genero: " << lista[i]->getGenero();
+        cout<< "Peso: " << lista[i]->getPeso() << "Kg";
+        cout<< "Racion diaria: " << lista[i]->getRacionDiaria()<< "Kg";
+        DtPerro* datosMascotaPerro = dynamic_cast<DtPerro*>(lista[i]);
+	DtGato* datosMascotaGato	= dynamic_cast<DtGato*>(lista[i]);
+        if(datosMascotaPerro != NULL){
+            cout<< "Raza: " << datosMascotaPerro->getRazaPerro();
+            if (datosMascotaPerro->getVacunaCachorro()) {
+                cout<< "Vacunado: Si";
+            }
+            else {
+                cout<< "Vacunado: No";
+            }
+        }
+        else {
+            cout<< "Tipo de pelo: " << datosMascotaGato->getTipoPelo();
+        }
+        i++;
+    }
+    
 }
 
 void removerSocio(){
