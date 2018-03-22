@@ -1,0 +1,3 @@
+ 1- Se necesito una dependencia circular entre A(teniendo referencias a B y C), B(teniendo referencias a A y C), y C(teniendo referencias a A y B).
+
+2- Se le dice forward declaration, a la declaracion de un identificador(sea correspondiente a una entidad, variable, constante o funcion) que todavia no ha sido completamente definido.
