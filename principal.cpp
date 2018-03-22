@@ -36,8 +36,8 @@ coleSocios socios;
 
 void agregar_a_coleccion(Socio *agregar) {
     if (socios->tope < MAX_SOCIOS + 1) {
-        socios->tope++;
         socios->arraySocios[socios->tope] = agregar;
+        socios->tope++;
     }
 }
 
@@ -71,7 +71,7 @@ void registrarSocio(string ci, string nombre, const DtMascota &dtMascota) { //ac
     int dia = tm_t2->tm_mday;
     int mes = tm_t2->tm_mon;
     int anio = tm_t2->tm_year;
-    DtFecha *fechaIngreso = new DtFecha(dia, mes, anio);
+    DtFecha *fechaIngreso = new DtFecha(dia, mes + 1, anio + 1900);
 
     Socio *nuevoSocio = new Socio(ci, nombre, fechaIngreso);
 
@@ -106,7 +106,7 @@ void ingresarConsulta(string motivo, string ci) {
     int dia = tm_t2->tm_mday;
     int mes = tm_t2->tm_mon;
     int anio = tm_t2->tm_year;
-    DtFecha *fecha = new DtFecha(dia, mes, anio);
+    DtFecha *fecha = new DtFecha(dia, mes + 1, anio + 1900);
     //aca va un try
     if (i <= tamanio) { //Si se encuentra el socio, se agrega su mascota
         DtConsulta *consulta = new DtConsulta(fecha, motivo);
@@ -182,14 +182,14 @@ void insertarSocio() {
     cout << "Ingrese la cedula de identidad:";
     string ci;
     cin >> ci;
-    cout << "Ingrese datos de la mascota";
+    cout << "Ingrese datos de la mascota\n";
     cout << "Nombre:";
     string nombreMascota;
     cin >> nombreMascota;
     cout << "Peso:";
     float peso;
     cin >> peso;
-    cout << "Genero:";
+    cout << "Genero:\n";
     cout << " 1. Macho\n";
     cout << " 2. Hembra\n";
     int opcionGenero;
@@ -211,7 +211,7 @@ void insertarSocio() {
     switch (opcionMascota) {
     case 1: {
         //cargar datatype Perro
-        cout << "Ingrese la raza del perro:";
+        cout << "Ingrese la raza del perro:\n";
         cout << " 0. Labrador\n";
         cout << " 1. Ovejero\n";
         cout << " 2. Bulldog\n";
@@ -259,7 +259,7 @@ void insertarSocio() {
 
     case 2:
 
-        cout << "Ingrese el tipo de pelo del gato:";
+        cout << "Ingrese el tipo de pelo del gato:\n";
         cout << " 1. Corto\n";
         cout << " 2. Mediano\n";
         cout << " 3. Largo\n";
@@ -290,14 +290,14 @@ void insertarMascota() {
     cout << "Ingrese la cedula de identidad del socio:";
     string ci;
     cin >> ci;
-    cout << "Ingrese datos de la mascota";
+    cout << "Ingrese datos de la mascota\n";
     cout << "Nombre:";
     string nombreMascota;
     cin >> nombreMascota;
     cout << "Peso:";
     float peso;
     cin >> peso;
-    cout << "Genero:";
+    cout << "Genero:\n";
     cout << " 1. Macho\n";
     cout << " 2. Hembra\n";
     int opcionGenero;
@@ -319,7 +319,7 @@ void insertarMascota() {
     switch (opcionMascota) {
     case 1: {
         //cargar datatype Perro
-        cout << "Ingrese la raza del perro:";
+        cout << "Ingrese la raza del perro:\n";
         cout << " 0. Labrador\n";
         cout << " 1. Ovejero\n";
         cout << " 2. Bulldog\n";
@@ -367,7 +367,7 @@ void insertarMascota() {
 
     case 2:
 
-        cout << "Ingrese el tipo de pelo del gato:";
+        cout << "Ingrese el tipo de pelo del gato:\n";
         cout << " 1. Corto\n";
         cout << " 2. Mediano\n";
         cout << " 3. Largo\n";
@@ -430,7 +430,7 @@ void verConsultas() {
         int dia_i = fecha_i->getDia();
         int mes_i = lista[i]->getFecha()->getMes();
         int anio_i = lista[i]->getFecha()->getAnio();
-        cout << "Consulta #" << i + 1 << " fecha:" << dia_i << "/" << mes_i << "/" << anio_i;
+        cout << "Consulta #" << i + 1 << " fecha:" << dia_i << "/" << mes_i << "/" << anio_i << endl;
         cout << "Motivo:\n";
         cout << lista[i]->getMotivo();
         i++;
@@ -442,30 +442,30 @@ void verMascotas() {
     cout << "Ingrese la cedula de identidad del socio:";
     string ci;
     cin >> ci;
-    cout << "Ingrese la cantidad de mascotaque desea ver:";
+    cout << "Ingrese la cantidad de mascotas que desea ver:";
     int cant;
     cin >> cant;
     DtMascota** lista = obtenerMascotas(ci, cant); //Falta implementar imprimirMascotas
     int i = 0;
     while (i < cant) {
-        cout << "Mascota #" << i + 1;
-        cout<< "Nombre: " << lista[i]->getNombre();
-        cout << "Genero: " << lista[i]->getGenero();
-        cout << "Peso: " << lista[i]->getPeso() << "kg";
-        cout << "Racion diaria: " << lista[i]->getRacionDiaria() << "gramos";
+        cout << "Mascota #" << i + 1 << endl;
+        cout<< "Nombre: " << lista[i]->getNombre()<< endl;
+        cout << "Genero: " << lista[i]->getGenero()<< endl;
+        cout << "Peso: " << lista[i]->getPeso() << "kg"<< endl;
+        cout << "Racion diaria: " << lista[i]->getRacionDiaria() << "gramos"<< endl;
         DtPerro* datosMascotaPerro = dynamic_cast<DtPerro*>(lista[i]);
         DtGato* datosMascotaGato    = dynamic_cast<DtGato*>(lista[i]);
         if (datosMascotaPerro != NULL) {
-            cout << "Raza: " << datosMascotaPerro->getRazaPerro();
+            cout << "Raza: " << datosMascotaPerro->getRazaPerro()<< endl;
             if (datosMascotaPerro->getVacunaCachorro()) {
-                cout << "Tiene vacuna del cachorro: Si";
+                cout << "Tiene vacuna del cachorro: Si" << endl;
             }
             else {
-                cout << "Tiene vacuna del cachorro: No";
+                cout << "Tiene vacuna del cachorro: No" << endl;
             }
         }
         else {
-            cout << "Tipo de pelo: " << datosMascotaGato->getTipoPelo();
+            cout << "Tipo de pelo: " << datosMascotaGato->getTipoPelo() << endl;
         }
         i++;
     }
@@ -485,6 +485,7 @@ int main() {
     bool termino = false;
     int opcion;
     while (!termino) {
+        cout << "\033[2J\033[1;1H"; //Clear Screen
         cout << " Bienvenido. Elija una opcion:\n";
         cout << " 1. Registrar socio\n";
         cout << " 2. Agregar mascota\n";
