@@ -19,7 +19,7 @@ using namespace std;
 const int MAX_SOCIOS = 100;
 
 struct coleccionSocios {
-    Socio *arraySocios[MAX_SOCIOS + 1];
+    Socio *arraySocios[MAX_SOCIOS];
     int tope;
 };
 
@@ -35,7 +35,7 @@ coleSocios crearColeSocios() {
 coleSocios socios;
 
 void agregar_a_coleccion(Socio *agregar) {
-    if (socios->tope < MAX_SOCIOS + 1) {
+    if (socios->tope < MAX_SOCIOS) {
         socios->arraySocios[socios->tope] = agregar;
         socios->tope++;
     }
@@ -43,7 +43,7 @@ void agregar_a_coleccion(Socio *agregar) {
 
 int buscarSocio(string ci) {
     int i = 0;
-    while (i <= socios->tope  &&  socios->arraySocios[i]->getCI() != ci )
+    while (i < socios->tope  &&  socios->arraySocios[i]->getCI() != ci )
         i++;
     return i;
 }
@@ -56,7 +56,7 @@ void agregarMascota(string ci, const DtMascota &dtMascota) {
     //busca el indice donde esta el socio
     int i = buscarSocio(ci);
     //aca va un try
-    if (i <= tamanio) //Si se encuentra el socio, se agrega su mascota
+    if (i < tamanio) //Si se encuentra el socio, se agrega su mascota
         socios->arraySocios[i]->agregarMascota(mascotaAux);
 }
 
@@ -108,7 +108,7 @@ void ingresarConsulta(string motivo, string ci) {
     int anio = tm_t2->tm_year;
     DtFecha *fecha = new DtFecha(dia, mes + 1, anio + 1900);
     //aca va un try
-    if (i <= tamanio) { //Si se encuentra el socio, se agrega su mascota
+    if (i < tamanio) { //Si se encuentra el socio, se agrega su mascota
         DtConsulta *consulta = new DtConsulta(fecha, motivo);
         socios->arraySocios[i]->agregarConsulta(consulta);
     }
@@ -147,7 +147,7 @@ void eliminarSocio(string ci) {
     //Usar destructor de Socio
     // Segun Santi esto llama a todo implicitamente
     Socio *socioAux = socios->arraySocios[i];
-    socios->arraySocios[i] = socios->arraySocios[socios->tope];
+    socios->arraySocios[i] = socios->arraySocios[socios->tope - 1];
     delete socioAux;
     socios->tope--;
 }
