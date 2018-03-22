@@ -46,7 +46,8 @@ DtFecha* Socio::getFechaIngreso(){
 
 void Socio::agregarConsulta(DtConsulta *datosConsulta){
 	Consulta* nuevaConsulta = new Consulta(datosConsulta->getFecha(), datosConsulta->getMotivo());
-	int capacidad = sizeof(this->consultas); // maximo del arreglo, lo cambie porque no funcionaba sino
+	//int capacidad = sizeof(this->consultas); // maximo del arreglo, lo cambie porque no funcionaba sino
+        int capacidad = getSizeConsultas();
         int posicionAgregar = 0;
         
         while(posicionAgregar < capacidad && this->consultas[posicionAgregar] != NULL)
