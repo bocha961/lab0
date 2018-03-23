@@ -16,6 +16,12 @@ Socio::Socio(string ci, string nombre, DtFecha *fechaIngreso){
     this->fechaIngreso = fechaIngreso;
     this->mascotas = new Mascota*[10];
     this->consultas= new Consulta*[20];
+    for(int i=0; i < this->sizeMascotas; i++){
+        this->mascotas[i]= NULL;
+    }
+    for(int i=0; i < this->sizeConsultas; i++){
+        this->consultas[i]= NULL;
+    }
 }
 Socio::~Socio(){
 	delete[] this->mascotas;
