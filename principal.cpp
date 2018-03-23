@@ -401,12 +401,13 @@ void insertarConsulta() {
     cin >> ci;
     cout << "Ingrese la consulta:";
     string consulta;
-    cin >> consulta;
+    cin.ignore();
+    getline(cin, consulta);
     ingresarConsulta(consulta, ci);
 }
 
 void verConsultas() {
-    cout << "Ingrese la fecha que quiera ver las consultas realizas hasta entonces";
+    cout << "Ingrese la fecha que quiera ver las consultas realizas hasta entonces" << endl;
     cout << "Dia:";
     int dia;
     cin >> dia;
