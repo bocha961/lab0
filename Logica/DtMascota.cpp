@@ -10,18 +10,18 @@ DtMascota::DtMascota(string nombre, Genero genero, float peso, float racionDiari
 DtMascota::~DtMascota() {
 }
 
-string DtMascota::getNombre(){
+string DtMascota::getNombre() const{
     return this->nombre;
 }
 
-Genero DtMascota::getGenero(){
+Genero DtMascota::getGenero() const{
     return this->genero;
 }
 
-float DtMascota::getPeso(){
+float DtMascota::getPeso() const{
     return this->peso;
 }
 
-float DtMascota::getRacionDiaria(){
+float DtMascota::getRacionDiaria() const{
     return this->racionDiaria;
 }
