@@ -128,10 +128,13 @@ DtConsulta** verConsultasAntesDeFecha(const DtFecha& fecha, string ciSocio, int&
     int i = buscarSocio(ciSocio);
     int j = 0;
     DtConsulta *arregloRes[cantConsultas]; //arreglo que voy a devolver
+    for(int k=0; k < cantConsultas; k++){
+        arregloRes[k]= NULL;
+    }
     Consulta **consultasHechas = socios->arraySocios[i]->getConsultas();//arreglo de todas las consultas hechas
     DtFecha *fechaAux = (DtFecha *)&fecha;
 
-    while ( esMenorFecha(consultasHechas[j]->getFecha(), fechaAux)) {
+    while (j < cantConsultas && esMenorFecha(consultasHechas[j]->getFecha(), fechaAux)) {
         //Hago una copia del arreglo hasta la fecha
         //Esto esta Mal ya que no son tipos compatibles
         arregloRes[j] = new DtConsulta(consultasHechas[j]->getFecha(), consultasHechas[j]->getMotivo());
@@ -139,7 +142,6 @@ DtConsulta** verConsultasAntesDeFecha(const DtFecha& fecha, string ciSocio, int&
 
     }
     DtConsulta **res = arregloRes;
-
     return res;
 }
 void eliminarSocio(string ci) {
@@ -161,13 +163,14 @@ DtMascota** obtenerMascotas(string ci, int &cantMascotas) {
     DtMascota *arregloMascota[cantMascotas];
     Mascota **mascotasExistentes = socios->arraySocios[i]->getMascotas();
     while (j < cantMascotas) {
-        DtPerro *datosMascotaPerro = dynamic_cast<DtPerro*>(mascotasExistentes[j]); // The operand of a pointer dynamic_cast must be a pointer to a complete class
-        DtGato *datosMascotaGato = dynamic_cast<DtGato*>(mascotasExistentes[j]);
+        Perro *datosMascotaPerro = dynamic_cast<Perro*>(mascotasExistentes[j]); // The operand of a pointer dynamic_cast must be a pointer to a complete class
+        Gato *datosMascotaGato = dynamic_cast<Gato*>(mascotasExistentes[j]);
         if (datosMascotaPerro != NULL)
             arregloMascota[j] = new DtPerro(datosMascotaPerro->getNombre(), datosMascotaPerro->getGenero(), datosMascotaPerro->getPeso(), datosMascotaPerro->getRazaPerro(),
                                             datosMascotaPerro->getVacunaCachorro());
-        else
+        else if (datosMascotaGato != NULL)
             arregloMascota[j] = new DtGato(datosMascotaGato->getNombre(), datosMascotaGato->getGenero(), datosMascotaGato->getPeso(), datosMascotaGato->getTipoPelo());
+        else cout << "gg" << endl;
         j++;
     }
     DtMascota **res = arregloMascota;
@@ -424,19 +427,30 @@ void verConsultas() {
     cout << "Ingrese la cantidad de consultas que desea ver:";
     int cant;
     cin >> cant;
-    DtConsulta** lista = verConsultasAntesDeFecha(*fecha, ci, cant); //Falta implementar imprimirConsultas
+    DtConsulta** lista = verConsultasAntesDeFecha(*fecha, ci, cant);
+    DtConsulta* aux[cant];
     int i = 0;
-    while (i < cant) {
-        DtFecha *fecha_i = lista[i]->getFecha();
-        int dia_i = fecha_i->getDia();
-        int mes_i = lista[i]->getFecha()->getMes();
-        int anio_i = lista[i]->getFecha()->getAnio();
-        cout << "Consulta #" << i + 1 << " fecha:" << dia_i << "/" << mes_i << "/" << anio_i << endl;
-        cout << "Motivo:\n";
-        cout << lista[i]->getMotivo();
+    while(i < cant){
+        aux[i] = new DtConsulta(lista[i]->getFecha(), lista[i]->getMotivo());
         i++;
     }
-
+    
+    int k= 1;
+    i = 0;
+    while (i < cant) {
+        //DtFecha *fecha_i = lista[i]->getFecha();
+        int dia_i = aux[i]->getFecha()->getDia();
+        int mes_i = aux[i]->getFecha()->getMes();
+        int anio_i = aux[i]->getFecha()->getAnio();
+        cout << "Consulta " << k << " fecha:" << dia_i << "/" << mes_i << "/" << anio_i << endl;
+        cout << "Motivo: " << aux[i]->getMotivo();
+        cout << aux[i]->getMotivo() << endl;
+        i++;
+        k++;
+    }
+    cout << "<< Ingrese 0/1 para continuar >>\n";
+    bool finish;
+    cin >> finish;
 }
 
 void verMascotas() {
@@ -446,16 +460,30 @@ void verMascotas() {
     cout << "Ingrese la cantidad de mascotas que desea ver:";
     int cant;
     cin >> cant;
-    DtMascota** lista = obtenerMascotas(ci, cant); //Falta implementar imprimirMascotas
+    DtMascota** lista = obtenerMascotas(ci, cant);
+    DtMascota* aux[cant];
     int i = 0;
+    while(i < cant){
+        DtPerro* dataPerro = dynamic_cast<DtPerro*>(lista[i]);
+        DtGato* dataGato    = dynamic_cast<DtGato*>(lista[i]);
+        if (dataPerro != NULL) {
+            aux[i] = new DtPerro(dataPerro->getNombre(), dataPerro->getGenero(), dataPerro->getPeso(), dataPerro->getRazaPerro(), dataPerro->getVacunaCachorro());
+        }
+        else {
+            aux[i] = new DtGato(dataGato->getNombre(), dataGato->getGenero(), dataGato->getPeso(), dataGato->getTipoPelo());
+        }      
+        i++;
+    }
+    i = 0;
+    int k = 1;
     while (i < cant) {
-        cout << "Mascota #" << i + 1 << endl;
-        cout<< "Nombre: " << lista[i]->getNombre()<< endl;
-        cout << "Genero: " << lista[i]->getGenero()<< endl;
-        cout << "Peso: " << lista[i]->getPeso() << "kg"<< endl;
-        cout << "Racion diaria: " << lista[i]->getRacionDiaria() << "gramos"<< endl;
-        DtPerro* datosMascotaPerro = dynamic_cast<DtPerro*>(lista[i]);
-        DtGato* datosMascotaGato    = dynamic_cast<DtGato*>(lista[i]);
+        cout << "Mascota #" << k << endl;
+        cout<< "Nombre: " << aux[i]->getNombre()<< endl;
+        cout << "Genero: " << aux[i]->getGenero()<< endl;
+        cout << "Peso: " << aux[i]->getPeso() << "kg"<< endl;
+        cout << "Racion diaria: " << aux[i]->getRacionDiaria() << "gramos"<< endl;
+        DtPerro* datosMascotaPerro = dynamic_cast<DtPerro*>(aux[i]);
+        DtGato* datosMascotaGato    = dynamic_cast<DtGato*>(aux[i]);
         if (datosMascotaPerro != NULL) {
             cout << "Raza: " << datosMascotaPerro->getRazaPerro()<< endl;
             if (datosMascotaPerro->getVacunaCachorro()) {
@@ -470,7 +498,9 @@ void verMascotas() {
         }
         i++;
     }
-
+    cout << "<< Ingrese 0/1 para continuar >>\n";
+    bool finish;
+    cin >> finish;
 }
 
 void removerSocio() {
