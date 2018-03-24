@@ -453,6 +453,11 @@ void verConsultas() {
     cin >> finish;
 }
 
+float round(float var){
+    float valor = (int)(var * 1000 + .5);
+    return (float)valor / 1000;
+}
+
 void verMascotas() {
     cout << "Ingrese la cedula de identidad del socio:";
     string ci;
@@ -479,13 +484,13 @@ void verMascotas() {
     while (i < cant) {
         cout << "Mascota #" << k << endl;
         cout<< "Nombre: " << aux[i]->getNombre()<< endl;
-        cout << "Genero: " << aux[i]->getGenero()<< endl;
-        cout << "Peso: " << aux[i]->getPeso() << "kg"<< endl;
-        cout << "Racion diaria: " << aux[i]->getRacionDiaria() << "gramos"<< endl;
+        cout << "Genero: " << generoString(aux[i]->getGenero())<< endl;
+        cout << "Peso: " << round(aux[i]->getPeso()) << "kg"<< endl;
+        cout << "Racion diaria: " << round(aux[i]->getRacionDiaria()) << "gramos"<< endl;
         DtPerro* datosMascotaPerro = dynamic_cast<DtPerro*>(aux[i]);
         DtGato* datosMascotaGato    = dynamic_cast<DtGato*>(aux[i]);
         if (datosMascotaPerro != NULL) {
-            cout << "Raza: " << datosMascotaPerro->getRazaPerro()<< endl;
+            cout << "Raza: " << razaPerroString(datosMascotaPerro->getRazaPerro())<< endl;
             if (datosMascotaPerro->getVacunaCachorro()) {
                 cout << "Tiene vacuna del cachorro: Si" << endl;
             }
@@ -494,7 +499,7 @@ void verMascotas() {
             }
         }
         else {
-            cout << "Tipo de pelo: " << datosMascotaGato->getTipoPelo() << endl;
+            cout << "Tipo de pelo: " << tipoPeloString(datosMascotaGato->getTipoPelo()) << endl;
         }
         i++;
     }
