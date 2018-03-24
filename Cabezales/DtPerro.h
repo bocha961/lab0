@@ -13,8 +13,10 @@ class DtPerro : public DtMascota {
     public:
         DtPerro(string nombre, Genero genero, float peso, RazaPerro raza, bool vacunaCachorro);
         ~DtPerro();
-        RazaPerro getRazaPerro();
-        bool getVacunaCachorro();
+
+        RazaPerro getRazaPerro() const;
+        bool getVacunaCachorro() const;
+    	friend ostream& operator << (ostream &o,const DtPerro &p);
 };
 
 

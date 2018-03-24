@@ -13,7 +13,9 @@ class DtGato : public DtMascota {
     public:
         DtGato(string nombre, Genero genero, float peso, TipoPelo tipoPelo);
         ~DtGato();
-        TipoPelo getTipoPelo();
+
+        TipoPelo getTipoPelo() const;
+    	friend ostream& operator << (ostream &o,const DtGato &p);
 };
 
 #endif
