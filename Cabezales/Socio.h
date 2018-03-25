@@ -16,9 +16,11 @@ class Socio{
         string ci, nombre;
         DtFecha* fechaIngreso;
         Mascota** mascotas;
+        int topeMascotas = 0;
         const int sizeMascotas = 10;
         Consulta** consultas;
         const int sizeConsultas = 20;
+        int topeConsultas = 0;
 
     public:
         Socio(string ci, string nombre, DtFecha *fechaIngreso);
@@ -38,6 +40,10 @@ class Socio{
         Mascota **getMascotas();
         const int getSizeMascotas();
         const int getSizeConsultas();
+        void SetTopeMascotas(int i);
+        void SetTopeConsultas(int i);
+        int getTopeMascotas();
+        int getTopeConsultas();
 };
 
 

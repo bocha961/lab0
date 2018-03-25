@@ -14,6 +14,8 @@ class DtFecha {
         int getDia();
         int getMes();
         int getAnio();
+        
+        friend bool operator< (DtFecha &fecha1, DtFecha &fecha2);
 };
 
 #endif
