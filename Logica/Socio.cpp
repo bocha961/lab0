@@ -14,14 +14,10 @@ Socio::Socio(string ci, string nombre, DtFecha *fechaIngreso){
     this->ci = ci;
     this->nombre = nombre;
     this->fechaIngreso = fechaIngreso;
-    this->mascotas = new Mascota*[10];
-    this->consultas= new Consulta*[20];
-    for(int i=0; i < this->sizeMascotas; i++){
-        this->mascotas[i]= NULL;
-    }
-    for(int i=0; i < this->sizeConsultas; i++){
-        this->consultas[i]= NULL;
-    }
+    this->mascotas = new Mascota*[sizeMascotas];
+    this->topeMascotas = 0;
+    this->consultas= new Consulta*[sizeConsultas];
+    this->topeConsultas = 0;
 }
 Socio::~Socio(){
 	delete[] this->mascotas;
@@ -54,13 +50,12 @@ void Socio::agregarConsulta(DtConsulta *datosConsulta){
 	Consulta* nuevaConsulta = new Consulta(datosConsulta->getFecha(), datosConsulta->getMotivo());
 	//int capacidad = sizeof(this->consultas); // maximo del arreglo, lo cambie porque no funcionaba sino
         int capacidad = getSizeConsultas();
-        int posicionAgregar = 0;
-        
-        while(posicionAgregar < capacidad && this->consultas[posicionAgregar] != NULL)
-            posicionAgregar++;
-        
-	if(posicionAgregar < capacidad)
-		this->consultas[posicionAgregar] = nuevaConsulta;
+        int posicionAgregar = getTopeConsultas();
+
+	if(posicionAgregar < capacidad){
+            this->consultas[posicionAgregar] = nuevaConsulta;
+            SetTopeConsultas(getTopeConsultas() + 1);
+        }
 	else
 		throw std::range_error("Maximo de consultas");
 }
@@ -73,13 +68,9 @@ Consulta** Socio::getConsultas(){
 
 void Socio::agregarMascota(DtMascota *datosMascota){
     int capacidad = getSizeMascotas();
-    int posicionAgregar = 0;
+    int posicionAgregar = getTopeMascotas();
     
-    while(posicionAgregar < capacidad && this->mascotas[posicionAgregar] != NULL)
-        posicionAgregar++;
-	
-
-    if(posicionAgregar <= capacidad){
+    if(posicionAgregar < capacidad){
         
 	DtPerro* datosMascotaPerro  = dynamic_cast<DtPerro*>(datosMascota); // The operand of a pointer dynamic_cast must be a pointer to a complete class
 	DtGato* datosMascotaGato    = dynamic_cast<DtGato*>(datosMascota); // subraya en datosMascota, ni idea que es 
@@ -98,12 +89,11 @@ void Socio::agregarMascota(DtMascota *datosMascota){
 												datosMascotaGato->getTipoPelo());
 		}
 		this->mascotas[posicionAgregar] = nuevaMascota;
+                SetTopeMascotas(getTopeMascotas() + 1);
 	}else
 		throw std::range_error("Maximo de mascotas");
 }
-void Socio::setMascotas(Mascota** mascotas){
-    this->mascotas = mascotas; //must be a modifiable lvalue
-}
+
 Mascota** Socio::getMascotas(){
     return this->mascotas; //must be a modifiable lvalue
 }
@@ -114,4 +104,20 @@ const int Socio::getSizeMascotas(){
 
 const int Socio::getSizeConsultas(){
     return this->sizeConsultas;
+}
+
+int Socio::getTopeMascotas(){
+    return this->topeMascotas;
+}
+
+int Socio::getTopeConsultas(){
+    return this->topeConsultas;
+}
+
+void Socio::SetTopeMascotas(int i){
+    this->topeMascotas = i;
+}
+
+void Socio::SetTopeConsultas(int i){
+    this->topeConsultas = i;
 }
