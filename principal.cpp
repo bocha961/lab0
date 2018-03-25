@@ -112,7 +112,7 @@ void ingresarConsulta(string motivo, string ci) {
     int anio = tm_t2->tm_year;
     DtFecha *fecha = new DtFecha(dia, mes + 1, anio + 1900);
     //aca va un try
-    if (i < tamanio) { //Si se encuentra el socio, se agrega su mascota
+    if (i < tamanio) { //Si se encuentra el socio, se agrega su consulta
         DtConsulta *consulta = new DtConsulta(fecha, motivo);
         socios->arraySocios[i]->agregarConsulta(consulta);
     }
@@ -594,6 +594,9 @@ int main() {
             catch(invalid_argument e){
                 cout << "\033[2J\033[1;1H"; //Clear Screen
                 mensaje = " Valor invalido";                        
+            }catch(range_error e){
+                cout << "\033[2J\033[1;1H"; //Clear Screen
+                mensaje = "Maximo de mascotas alcanzado";
             }
             break;
         case 3:
@@ -604,6 +607,9 @@ int main() {
             catch(invalid_argument e){
                 cout << "\033[2J\033[1;1H"; //Clear Screen
                 mensaje = " CI no registrada";                        
+            }catch(range_error e){
+                cout << "\033[2J\033[1;1H"; //Clear Screen
+                mensaje = "Maximo de consultas alcanzado";                        
             }
             break;
         case 4:
