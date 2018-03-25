@@ -132,7 +132,7 @@ DtConsulta** verConsultasAntesDeFecha(const DtFecha& fecha, string ciSocio, int&
     Consulta **consultasHechas = socios->arraySocios[i]->getConsultas();//arreglo de todas las consultas hechas
     DtFecha *fechaAux = (DtFecha *)&fecha;
 
-    while (j < cantConsultas && consultasHechas[j]->getFecha() < fechaAux) {
+    while ( (j < cantConsultas) && (*consultasHechas[j]->getFecha()<*fechaAux) ) {
         //Hago una copia del arreglo hasta la fecha
         //Esto esta Mal ya que no son tipos compatibles
         arregloRes[j] = new DtConsulta(consultasHechas[j]->getFecha(), consultasHechas[j]->getMotivo());
@@ -174,7 +174,7 @@ DtMascota** obtenerMascotas(string ci, int &cantMascotas) {
     return arregloMascota;
 }
 
-void insertarSocio() {
+string insertarSocio() {
     cout << "Ingrese datos personales" << endl;
     cout << "Ingrese el nombre del socio: ";
     string nombreSocio;
@@ -320,6 +320,7 @@ void insertarSocio() {
             throw invalid_argument("Identidad invalido");
             break;
     }
+    return ci;
 }
 
 void insertarMascota() {
@@ -486,7 +487,7 @@ void verConsultas() {
     string mesEntrada;
     cin >> mesEntrada;
     int mes = stoi(mesEntrada, NULL);
-    cout << "Anio:";
+    cout << "Año:";
     string anioEntrada;
     cin >> anioEntrada;
     int anio = stoi(anioEntrada, NULL);
@@ -502,12 +503,12 @@ void verConsultas() {
         
     int k= 1;
     int i = 0;
-    while (i < cant && cant != 0) {
+    while (i < cant && cant != 0 && lista[i] != NULL) {
         //DtFecha *fecha_i = lista[i]->getFecha();
         int dia_i = lista[i]->getFecha()->getDia();
         int mes_i = lista[i]->getFecha()->getMes();
         int anio_i = lista[i]->getFecha()->getAnio();
-        cout << "Consulta " << k << " fecha:" << dia_i << "/" << mes_i << "/" << anio_i << endl;
+        cout << "Consulta #" << k << "   fecha:" << dia_i << "/" << mes_i << "/" << anio_i << endl;
         cout << "Motivo: " << lista[i]->getMotivo() << endl;
         
         i++;
@@ -532,7 +533,7 @@ void verMascotas() {
         datosMascotaPerro = dynamic_cast<DtPerro*>(lista[i]); // The operand of a pointer dynamic_cast must be a pointer to a complete class
         datosMascotaGato = dynamic_cast<DtGato*>(lista[i]);
         
-        cout << "Mascota #" << i + 1;
+        cout << "Mascota #" << i + 1 << ":\n";
         if (datosMascotaPerro != NULL)
             cout << *datosMascotaPerro;
         else if(datosMascotaGato != NULL)
@@ -543,16 +544,17 @@ void verMascotas() {
     cin >> finish;
 }
 
-void removerSocio() {
+string removerSocio() {
     cout << "Ingrese la cedula de identidad del socio que desea eliminar:";
     string ci;
     cin >> ci;
     eliminarSocio(ci);
+    return ci;
 }
 
 int main() {
     socios = crearColeSocios();
-    string error;
+    string mensaje= "";
     bool termino = false;
     int opcion;
     while (!termino) {
@@ -565,8 +567,8 @@ int main() {
         cout << " 5. Ver mascotas de socio\n";
         cout << " 6. Eliminar socio\n";
         cout << " 0. Salir\n" << endl;
-        cout << error ;
-        error= "";
+        cout << mensaje ;
+        mensaje= "";
         cout << "\n Opcion:";
         cin >> opcion;
         cout << "\033[2J\033[1;1H"; //Clear Screen
@@ -577,29 +579,31 @@ int main() {
             break;
         case 1:
             try{
-                insertarSocio();
+                mensaje= " El socio de C.I. " + (insertarSocio()) + " ha sido registrado correctamente" ;
             }
             catch(invalid_argument e){
                 cout << "\033[2J\033[1;1H"; //Clear Screen
-                error = " Valor invalido";                        
+                mensaje = " Valor invalido";                        
             }
             break;
         case 2:
             try{
                 insertarMascota();
+                mensaje = " Mascota ingresada correctamente";
             }
             catch(invalid_argument e){
                 cout << "\033[2J\033[1;1H"; //Clear Screen
-                error = " Valor invalido";                        
+                mensaje = " Valor invalido";                        
             }
             break;
         case 3:
             try{
                 insertarConsulta();
+                mensaje = " Consulta ingresada correctamente";
             }
             catch(invalid_argument e){
                 cout << "\033[2J\033[1;1H"; //Clear Screen
-                error = " CI no registrada";                        
+                mensaje = " CI no registrada";                        
             }
             break;
         case 4:
@@ -608,7 +612,7 @@ int main() {
             }
             catch(invalid_argument e){
                 cout << "\033[2J\033[1;1H"; //Clear Screen
-                error = " CI no registrada";                        
+                mensaje = " CI no registrada";                        
             }
             break;
         case 5:
@@ -617,16 +621,16 @@ int main() {
             }
             catch(invalid_argument e){
                 cout << "\033[2J\033[1;1H"; //Clear Screen
-                error = " CI no registrada";                        
+                mensaje = " CI no registrada";                        
             }
             break;
         case 6:
             try{
-            removerSocio();
+                mensaje= " El socio de C.I. " + (removerSocio()) + " ha sido eliminado correctamente" ;
             }
             catch(invalid_argument e){
                 cout << "\033[2J\033[1;1H"; //Clear Screen
-                error = " CI no registrada";                        
+                mensaje = " CI no registrada";                        
             }
             break;
         default: cout << " Ingrese una opcion correcta\n";
